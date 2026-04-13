@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturer Portal - CertMed</title>
+    <meta name="description" content="CertMed manufacturer portal for pharmaceutical companies to register and manage their products">
+    <meta name="keywords" content="manufacturer portal, pharmaceutical registration, product management">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Manufacturer Portal - CertMed">
+    <meta property="og:description" content="CertMed manufacturer portal for pharmaceutical companies">
+    <meta property="og:image" content="https://certmed.com/images/og-image.jpg">
+    <meta property="og:url" content="https://certmed.com/manufacturer">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-enhanced.css">
+    
+    <!-- Manufacturer Specific Styles -->
+    <style>
+        .manufacturer-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .portal-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+        
+        .portal-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tab-btn {
+            padding: 1rem 2rem;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .login-form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+        }
+        
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .benefit-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .registration-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .step-description {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .resource-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .resource-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .resource-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .portal-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .benefits-grid,
+            .registration-steps,
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>CertMed</span>
+                </div>
+                <div class="brand-badge">BETA</div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="index.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="verify.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-qrcode"></i> Verify
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="catalog.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-pills"></i> Catalog
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="dashboard.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="manufacturer.html" class="nav-link active">
+                        <i class="fas fa-industry"></i> Manufacturers
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#portal" class="dropdown-item">
+                            <i class="fas fa-sign-in-alt"></i> Portal Login
+                        </a>
+                        <a href="#register" class="dropdown-item">
+                            <i class="fas fa-user-plus"></i> Register
+                        </a>
+                        <a href="#resources" class="dropdown-item">
+                            <i class="fas fa-book"></i> Resources
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="btn btn-outline" onclick="window.location.href='index.html#login'">Login</button>
+                <button class="btn btn-primary" onclick="window.location.href='index.html#signup'">Sign Up</button>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Manufacturer Hero -->
+    <section class="manufacturer-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Manufacturer Portal</h1>
+                <p>Join leading pharmaceutical companies in the fight against counterfeit medicines</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portal Section -->
+    <section class="portal-section" id="portal">
+        <div class="container">
+            <div class="section-header">
+                <h2>Access Your Portal</h2>
+                <p>Manage your products and track verification statistics</p>
+            </div>
+            
+            <div class="portal-tabs">
+                <button class="tab-btn active" onclick="showTab('login')">Portal Login</button>
+                <button class="tab-btn" onclick="showTab('register')">Register Company</button>
+                <button class="tab-btn" onclick="showTab('resources')">Resources</button>
+            </div>
+            
+            <!-- Login Tab -->
+            <div id="login-tab" class="tab-content active">
+                <div class="login-form-container">
+                    <h3>Manufacturer Portal Login</h3>
+                    <form onsubmit="handleManufacturerLogin(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="companyEmail">Company Email</label>
+                            <input type="email" id="companyEmail" class="form-input" placeholder="company@pharma.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="companyPassword">Password</label>
+                            <input type="password" id="companyPassword" class="form-input" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="rememberMe">
+                            <label for="rememberMe">Remember me</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
+                            <i class="fas fa-sign-in-alt"></i> Login to Portal
+                        </button>
+                        
+                        <div style="text-align: center; margin-top: 1rem;">
+                            <a href="#" onclick="showTab('register')" style="color: var(--primary-color);">Don't have an account? Register your company</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Register Tab -->
+            <div id="register-tab" class="tab-content">
+                <div class="login-form-container">
+                    <h3>Register Your Company</h3>
+                    <form onsubmit="handleCompanyRegistration(event)">
+                        <div class="form-group">
+                            <label class="form-label" for="companyName">Company Name</label>
+                            <input type="text" id="companyName" class="form-input" placeholder="Your Pharmaceutical Company" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="registrationNumber">Registration Number</label>
+                            <input type="text" id="registrationNumber" class="form-input" placeholder="PHRM-REG-123456" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="companyEmail">Company Email</label>
+                            <input type="email" id="companyEmail" class="form-input" placeholder="company@pharma.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="companyPhone">Phone Number</label>
+                            <input type="tel" id="companyPhone" class="form-input" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="companyAddress">Company Address</label>
+                            <textarea id="companyAddress" class="form-input" rows="3" placeholder="123 Pharma Street, Medical City, MC 12345" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="contactPerson">Contact Person</label>
+                            <input type="text" id="contactPerson" class="form-input" placeholder="John Doe" required>
+                        </div>
+                        
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the terms and conditions</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
+                            <i class="fas fa-user-plus"></i> Register Company
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Resources Tab -->
+            <div id="resources-tab" class="tab-content">
+                <div class="resources-grid">
+                    <div class="resource-card" onclick="downloadResource('api-docs')">
+                        <div class="resource-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="resource-title">API Documentation</h3>
+                        <p class="resource-description">Complete API documentation for integrating with CertMed verification system</p>
+                        <a href="#" class="resource-link">
+                            Download PDF <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card" onclick="downloadResource('integration-guide')">
+                        <div class="resource-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3 class="resource-title">Integration Guide</h3>
+                        <p class="resource-description">Step-by-step guide for integrating your manufacturing systems with CertMed</p>
+                        <a href="#" class="resource-link">
+                            Download PDF <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card" onclick="downloadResource('security-standards')">
+                        <div class="resource-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="resource-title">Security Standards</h3>
+                        <p class="resource-description">Security requirements and best practices for product verification</p>
+                        <a href="#" class="resource-link">
+                            Download PDF <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card" onclick="downloadResource('compliance-guide')">
+                        <div class="resource-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3 class="resource-title">Compliance Guide</h3>
+                        <p class="resource-description">Regulatory compliance requirements for pharmaceutical manufacturers</p>
+                        <a href="#" class="resource-link">
+                            Download PDF <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card" onclick="downloadResource('technical-specs')">
+                        <div class="resource-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3 class="resource-title">Technical Specifications</h3>
+                        <p class="resource-description">Technical specifications for QR codes and product labeling</p>
+                        <a href="#" class="resource-link">
+                            Download PDF <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="resource-card" onclick="downloadResource('support')">
+                        <div class="resource-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="resource-title">Support Portal</h3>
+                        <p class="resource-description">Access our dedicated support portal for technical assistance</p>
+                        <a href="#" class="resource-link">
+                            Visit Portal <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Partner with CertMed?</h2>
+                <p>Benefits of joining our anti-counterfeit network</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card" data-aos="fade-up">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="benefit-title">Enhanced Security</h3>
+                    <p class="benefit-description">Protect your brand from counterfeit products with our advanced verification system</p>
+                </div>
+                
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="benefit-title">Real-time Analytics</h3>
+                    <p class="benefit-description">Track verification statistics and gain insights into product performance</p>
+                </div>
+                
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="benefit-title">Customer Trust</h3>
+                    <p class="benefit-description">Build trust with customers through verified authentic products</p>
+                </div>
+                
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="benefit-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="benefit-title">Global Reach</h3>
+                    <p class="benefit-description">Access our global network of verification points and distributors</p>
+                </div>
+                
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="benefit-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="benefit-title">Mobile Integration</h3>
+                    <p class="benefit-description">Seamless integration with mobile apps for on-the-go verification</p>
+                </div>
+                
+                <div class="benefit-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="benefit-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="benefit-title">Certification</h3>
+                    <p class="benefit-description">Get certified as a trusted manufacturer in our network</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Steps -->
+    <section class="registration-steps-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Registration Process</h2>
+                <p>Simple steps to get your company registered</p>
+            </div>
+            
+            <div class="registration-steps">
+                <div class="step-card" data-aos="fade-up">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Submit Application</h3>
+                    <p class="step-description">Fill out the registration form with your company details and required documentation</p>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Verification</h3>
+                    <p class="step-description">Our team will verify your company credentials and regulatory compliance</p>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Setup Integration</h3>
+                    <p class="step-description">Integrate your systems with our API and set up product verification</p>
+                </div>
+                
+                <div class="step-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Go Live</h3>
+                    <p class="step-description">Start protecting your products and gain access to verification analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <div class="footer-logo">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>CertMed</span>
+                        </div>
+                        <p>Advanced medicine authentication and anti-counterfeit platform</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="verify.html">Verify</a></li>
+                            <li><a href="catalog.html">Catalog</a></li>
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="manufacturer.html">Manufacturers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Newsletter</h4>
+                        <p>Stay updated with our latest features and security updates</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 CertMed. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Manufacturer-specific JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+        });
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function handleManufacturerLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('companyEmail').value;
+            const password = document.getElementById('companyPassword').value;
+            
+            // Simulate login
+            appState.showToast('Logging into manufacturer portal...', 'info');
+            
+            setTimeout(() => {
+                appState.showToast('Login successful! Redirecting to dashboard...', 'success');
+                // In production, this would redirect to the actual manufacturer dashboard
+                console.log('Manufacturer login:', { email, password });
+            }, 1500);
+        }
+
+        function handleCompanyRegistration(event) {
+            event.preventDefault();
+            
+            const formData = {
+                companyName: document.getElementById('companyName').value,
+                registrationNumber: document.getElementById('registrationNumber').value,
+                email: document.getElementById('companyEmail').value,
+                phone: document.getElementById('companyPhone').value,
+                address: document.getElementById('companyAddress').value,
+                contactPerson: document.getElementById('contactPerson').value
+            };
+            
+            // Simulate registration
+            appState.showToast('Submitting company registration...', 'info');
+            
+            setTimeout(() => {
+                appState.showToast('Registration submitted successfully! We will contact you within 24 hours.', 'success');
+                console.log('Company registration:', formData);
+                
+                // Reset form
+                event.target.reset();
+                
+                // Switch to login tab
+                showTab('login');
+            }, 2000);
+        }
+
+        function downloadResource(resourceType) {
+            appState.showToast(`Downloading ${resourceType}...`, 'info');
+            
+            setTimeout(() => {
+                appState.showToast('Download started!', 'success');
+                console.log('Download resource:', resourceType);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

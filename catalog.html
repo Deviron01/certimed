@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog - CertMed</title>
+    <meta name="description" content="Browse and search verified medicines in CertMed's comprehensive product catalog">
+    <meta name="keywords" content="medicine catalog, product search, verified medicines, pharmaceutical database">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Product Catalog - CertMed">
+    <meta property="og:description" content="Browse and search verified medicines in CertMed's comprehensive catalog">
+    <meta property="og:image" content="https://certmed.com/images/og-image.jpg">
+    <meta property="og:url" content="https://certmed.com/catalog">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-enhanced.css">
+    
+    <!-- Catalog Specific Styles -->
+    <style>
+        .catalog-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .search-section {
+            padding: 3rem 0;
+            background: #f8f9fa;
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+        }
+        
+        .search-btn {
+            padding: 1rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+        
+        .filters-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        .filter-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .filter-chip {
+            padding: 0.5rem 1rem;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .filter-chip:hover,
+        .filter-chip.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .product-content {
+            padding: 1.5rem;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-manufacturer {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .product-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .product-detail i {
+            color: var(--primary-color);
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .product-actions .btn {
+            flex: 1;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .categories-section {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .category-card {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .category-card:hover .category-icon {
+            color: white;
+        }
+        
+        .category-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .category-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .category-card:hover .category-count {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .page-btn {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>CertMed</span>
+                </div>
+                <div class="brand-badge">BETA</div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="index.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="verify.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-qrcode"></i> Verify
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="catalog.html" class="nav-link active">
+                        <i class="fas fa-pills"></i> Catalog
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#search" class="dropdown-item">
+                            <i class="fas fa-search"></i> Search Products
+                        </a>
+                        <a href="#categories" class="dropdown-item">
+                            <i class="fas fa-th-large"></i> Categories
+                        </a>
+                        <a href="#manufacturers" class="dropdown-item">
+                            <i class="fas fa-industry"></i> Manufacturers
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="dashboard.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="manufacturer.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-industry"></i> Manufacturers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="btn btn-outline" onclick="window.location.href='index.html#login'">Login</button>
+                <button class="btn btn-primary" onclick="window.location.href='index.html#signup'">Sign Up</button>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Catalog Hero -->
+    <section class="catalog-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Product Catalog</h1>
+                <p>Browse our comprehensive database of verified medicines and pharmaceutical products</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section" id="search">
+        <div class="container">
+            <div class="search-container">
+                <form class="search-form" onsubmit="performSearch(event)">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search for medicines, manufacturers, or categories...">
+                    <button type="submit" class="search-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </form>
+                
+                <div class="filters-section">
+                    <div class="filter-group">
+                        <label class="filter-label">Categories</label>
+                        <div class="filter-options">
+                            <div class="filter-chip" onclick="toggleFilter(this)">All</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Pain Relief</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Antibiotics</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Vitamins</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Cardiovascular</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Diabetes</div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Form</label>
+                        <div class="filter-options">
+                            <div class="filter-chip" onclick="toggleFilter(this)">All</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Tablet</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Capsule</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Liquid</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Injection</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Cream</div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Prescription Required</label>
+                        <div class="filter-options">
+                            <div class="filter-chip" onclick="toggleFilter(this)">All</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">Yes</div>
+                            <div class="filter-chip" onclick="toggleFilter(this)">No</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Verified Products</h2>
+                <p>All products in our catalog have been verified for authenticity</p>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+            
+            <div class="pagination">
+                <button class="page-btn" onclick="changePage('prev')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">...</button>
+                <button class="page-btn">10</button>
+                <button class="page-btn" onclick="changePage('next')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse by Category</h2>
+                <p>Find medicines by therapeutic category</p>
+            </div>
+            
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterByCategory('pain-relief')">
+                    <div class="category-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <div class="category-name">Pain Relief</div>
+                    <div class="category-count">245 products</div>
+                </div>
+                
+                <div class="category-card" onclick="filterByCategory('antibiotics')">
+                    <div class="category-icon">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <div class="category-name">Antibiotics</div>
+                    <div class="category-count">189 products</div>
+                </div>
+                
+                <div class="category-card" onclick="filterByCategory('vitamins')">
+                    <div class="category-icon">
+                        <i class="fas fa-tablets"></i>
+                    </div>
+                    <div class="category-name">Vitamins</div>
+                    <div class="category-count">156 products</div>
+                </div>
+                
+                <div class="category-card" onclick="filterByCategory('cardiovascular')">
+                    <div class="category-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="category-name">Cardiovascular</div>
+                    <div class="category-count">134 products</div>
+                </div>
+                
+                <div class="category-card" onclick="filterByCategory('diabetes')">
+                    <div class="category-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="category-name">Diabetes</div>
+                    <div class="category-count">98 products</div>
+                </div>
+                
+                <div class="category-card" onclick="filterByCategory('respiratory')">
+                    <div class="category-icon">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <div class="category-name">Respiratory</div>
+                    <div class="category-count">87 products</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <div class="footer-logo">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>CertMed</span>
+                        </div>
+                        <p>Advanced medicine authentication and anti-counterfeit platform</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="verify.html">Verify</a></li>
+                            <li><a href="catalog.html">Catalog</a></li>
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="manufacturer.html">Manufacturers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Newsletter</h4>
+                        <p>Stay updated with our latest features and security updates</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 CertMed. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Catalog-specific JavaScript
+        const products = [
+            {
+                id: 1,
+                name: 'Paracetamol 500mg',
+                manufacturer: 'MediCorp Pharmaceuticals',
+                category: 'Pain Relief',
+                form: 'Tablet',
+                dosage: '500mg',
+                prescriptionRequired: false,
+                verified: true,
+                icon: 'fa-pills'
+            },
+            {
+                id: 2,
+                name: 'Amoxicillin 250mg',
+                manufacturer: 'HealthPharma Ltd',
+                category: 'Antibiotics',
+                form: 'Capsule',
+                dosage: '250mg',
+                prescriptionRequired: true,
+                verified: true,
+                icon: 'fa-capsules'
+            },
+            {
+                id: 3,
+                name: 'Ibuprofen 400mg',
+                manufacturer: 'BioMed Solutions',
+                category: 'Pain Relief',
+                form: 'Tablet',
+                dosage: '400mg',
+                prescriptionRequired: false,
+                verified: true,
+                icon: 'fa-pills'
+            },
+            {
+                id: 4,
+                name: 'Aspirin 100mg',
+                manufacturer: 'Global Pharma Inc',
+                category: 'Cardiovascular',
+                form: 'Tablet',
+                dosage: '100mg',
+                prescriptionRequired: false,
+                verified: true,
+                icon: 'fa-pills'
+            },
+            {
+                id: 5,
+                name: 'Vitamin D3 1000IU',
+                manufacturer: 'NutriHealth Labs',
+                category: 'Vitamins',
+                form: 'Softgel',
+                dosage: '1000IU',
+                prescriptionRequired: false,
+                verified: true,
+                icon: 'fa-tablets'
+            },
+            {
+                id: 6,
+                name: 'Metformin 500mg',
+                manufacturer: 'DiabetesCare Inc',
+                category: 'Diabetes',
+                form: 'Tablet',
+                dosage: '500mg',
+                prescriptionRequired: true,
+                verified: true,
+                icon: 'fa-pills'
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+        });
+
+        function loadProducts() {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = createProductCard(product);
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.innerHTML = `
+                <div class="product-image">
+                    <i class="fas ${product.icon}"></i>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-manufacturer">${product.manufacturer}</p>
+                    <div class="product-details">
+                        <div class="product-detail">
+                            <i class="fas fa-tag"></i>
+                            <span>${product.category}</span>
+                        </div>
+                        <div class="product-detail">
+                            <i class="fas fa-capsules"></i>
+                            <span>${product.form}</span>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-detail">
+                            <i class="fas fa-prescription"></i>
+                            <span>${product.prescriptionRequired ? 'Required' : 'OTC'}</span>
+                        </div>
+                        <div class="product-detail">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Verified</span>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary" onclick="viewProduct(${product.id})">View Details</button>
+                        <button class="btn btn-outline" onclick="verifyProduct(${product.id})">Verify</button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        function performSearch(event) {
+            event.preventDefault();
+            performAdvancedSearch();
+        }
+
+        function toggleFilter(element) {
+            // Remove active class from siblings
+            const siblings = element.parentElement.querySelectorAll('.filter-chip');
+            siblings.forEach(sibling => sibling.classList.remove('active'));
+            
+            // Add active class to clicked element
+            element.classList.add('active');
+            
+            // Here you would typically filter the products
+            console.log('Filter selected:', element.textContent);
+        }
+
+        function filterByCategory(category) {
+            const filteredProducts = products.filter(product => 
+                product.category.toLowerCase().includes(category.replace('-', ' '))
+            );
+            
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            filteredProducts.forEach(product => {
+                const productCard = createProductCard(product);
+                productsGrid.appendChild(productCard);
+            });
+            
+            // Scroll to products section
+            document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function viewProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                // Create product detail modal
+                showProductModal(product);
+            }
+        }
+
+        function verifyProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                // Store product in sessionStorage for verification page
+                sessionStorage.setItem('selectedProduct', JSON.stringify(product));
+                window.location.href = `verify.html#manual-verify`;
+            }
+        }
+
+        function showProductModal(product) {
+            const modalHtml = `
+                <div class="modal active" id="productModal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeProductModal()">&times;</span>
+                        <h2>${product.name}</h2>
+                        <div class="product-details">
+                            <p><strong>Manufacturer:</strong> ${product.manufacturer}</p>
+                            <p><strong>Category:</strong> ${product.category}</p>
+                            <p><strong>Dosage:</strong> ${product.dosage}</p>
+                            <p><strong>Form:</strong> ${product.form}</p>
+                            <p><strong>Prescription Required:</strong> ${product.prescriptionRequired ? 'Yes' : 'No'}</p>
+                            <p><strong>Verified:</strong> ${product.verified ? 'Yes' : 'No'}</p>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn btn-primary" onclick="verifyProduct(${product.id})">Verify Product</button>
+                            <button class="btn btn-outline" onclick="closeProductModal()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add modal to body
+            const modalContainer = document.createElement('div');
+            modalContainer.innerHTML = modalHtml;
+            document.body.appendChild(modalContainer);
+            
+            // Add backdrop click to close
+            modalContainer.addEventListener('click', (e) => {
+                if (e.target === modalContainer.firstChild) {
+                    closeProductModal();
+                }
+            });
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        function changePage(direction) {
+            const currentPage = parseInt(document.querySelector('.page-btn.active').textContent);
+            let newPage;
+            
+            if (direction === 'prev') {
+                newPage = Math.max(1, currentPage - 1);
+            } else {
+                newPage = Math.min(10, currentPage + 1);
+            }
+            
+            // Update active page button
+            document.querySelectorAll('.page-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent == newPage.toString()) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Scroll to top of products
+            document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' });
+            
+            appState.showToast(`Showing page ${newPage}`, 'info');
+        }
+
+        // Enhanced search functionality
+        function performAdvancedSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const activeFilters = getActiveFilters();
+            
+            let filteredProducts = products;
+            
+            // Apply search term filter
+            if (searchTerm) {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    product.manufacturer.toLowerCase().includes(searchTerm) ||
+                    product.category.toLowerCase().includes(searchTerm) ||
+                    product.form.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            // Apply category filter
+            if (activeFilters.category && activeFilters.category !== 'All') {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.category === activeFilters.category
+                );
+            }
+            
+            // Apply form filter
+            if (activeFilters.form && activeFilters.form !== 'All') {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.form === activeFilters.form
+                );
+            }
+            
+            // Apply prescription filter
+            if (activeFilters.prescription && activeFilters.prescription !== 'All') {
+                const requiresPrescription = activeFilters.prescription === 'Yes';
+                filteredProducts = filteredProducts.filter(product => 
+                    product.prescriptionRequired === requiresPrescription
+                );
+            }
+            
+            displayProducts(filteredProducts);
+            
+            // Show results count
+            const resultsCount = filteredProducts.length;
+            appState.showToast(`Found ${resultsCount} product${resultsCount !== 1 ? 's' : ''}`, 'info');
+        }
+
+        function getActiveFilters() {
+            const filters = {};
+            
+            // Get active category filter
+            const categoryChips = document.querySelectorAll('.filter-group')[0].querySelectorAll('.filter-chip.active');
+            if (categoryChips.length > 0) {
+                filters.category = categoryChips[0].textContent;
+            }
+            
+            // Get active form filter
+            const formChips = document.querySelectorAll('.filter-group')[1].querySelectorAll('.filter-chip.active');
+            if (formChips.length > 0) {
+                filters.form = formChips[0].textContent;
+            }
+            
+            // Get active prescription filter
+            const prescriptionChips = document.querySelectorAll('.filter-group')[2].querySelectorAll('.filter-chip.active');
+            if (prescriptionChips.length > 0) {
+                filters.prescription = prescriptionChips[0].textContent;
+            }
+            
+            return filters;
+        }
+
+        function displayProducts(productsToShow) {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            if (productsToShow.length === 0) {
+                productsGrid.innerHTML = `
+                    <div style="text-align: center; grid-column: 1 / -1; padding: 3rem;">
+                        <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                        <h3>No products found</h3>
+                        <p>Try adjusting your search or filters</p>
+                        <button class="btn btn-primary" onclick="clearAllFilters()" style="margin-top: 1rem;">Clear Filters</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            productsToShow.forEach(product => {
+                const productCard = createProductCard(product);
+                productsGrid.appendChild(productCard);
+            });
+        }
+
+        function clearAllFilters() {
+            // Clear search input
+            document.getElementById('searchInput').value = '';
+            
+            // Reset all filter chips
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            
+            // Show all products
+            displayProducts(products);
+            
+            appState.showToast('Filters cleared', 'info');
+        }
+
+        // Enhanced filter functionality
+        function toggleFilter(element) {
+            const filterGroup = element.parentElement;
+            
+            // Remove active class from siblings in the same group
+            filterGroup.querySelectorAll('.filter-chip').forEach(sibling => {
+                sibling.classList.remove('active');
+            });
+            
+            // Add active class to clicked element
+            element.classList.add('active');
+            
+            // Perform search with new filters
+            performAdvancedSearch();
+        }
+    </script>
+</body>
+</html>
