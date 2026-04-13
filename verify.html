@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Medicine - CertMed</title>
+    <meta name="description" content="Verify authentic medicines using QR code, SMS, or manual entry with CertMed's advanced authentication system">
+    <meta name="keywords" content="medicine verification, QR code, SMS verification, counterfeit detection">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Verify Medicine - CertMed">
+    <meta property="og:description" content="Advanced medicine authentication and verification system">
+    <meta property="og:image" content="https://certmed.com/images/og-image.jpg">
+    <meta property="og:url" content="https://certmed.com/verify">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Verify Medicine - CertMed">
+    <meta name="twitter:description" content="Advanced medicine authentication and verification system">
+    <meta name="twitter:image" content="https://certmed.com/images/twitter-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- QR Scanner Library -->
+    <script src="https://unpkg.com/qr-scanner/qr-scanner.umd.min.js"></script>
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-enhanced.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "CertMed Verify",
+      "description": "Advanced medicine verification and authentication system",
+      "url": "https://certmed.com/verify",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>CertMed</span>
+            </div>
+            <div class="loading-spinner"></div>
+            <p>Securing Your Health...</p>
+        </div>
+    </div>
+
+    <!-- Advanced Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>CertMed</span>
+                </div>
+                <div class="brand-badge">BETA</div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="index.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#verify" class="nav-link active">
+                        <i class="fas fa-qrcode"></i> Verify
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#qr-scanner" class="dropdown-item">
+                            <i class="fas fa-camera"></i> QR Scanner
+                        </a>
+                        <a href="#sms-verify" class="dropdown-item">
+                            <i class="fas fa-sms"></i> SMS Verify
+                        </a>
+                        <a href="#manual-verify" class="dropdown-item">
+                            <i class="fas fa-keyboard"></i> Manual Entry
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="catalog.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-pills"></i> Catalog
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="catalog.html#search" class="dropdown-item">
+                            <i class="fas fa-search"></i> Search Products
+                        </a>
+                        <a href="catalog.html#categories" class="dropdown-item">
+                            <i class="fas fa-th-large"></i> Categories
+                        </a>
+                        <a href="catalog.html#manufacturers" class="dropdown-item">
+                            <i class="fas fa-industry"></i> Manufacturers
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="dashboard.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="dashboard.html#analytics" class="dropdown-item">
+                            <i class="fas fa-chart-bar"></i> Analytics
+                        </a>
+                        <a href="dashboard.html#reports" class="dropdown-item">
+                            <i class="fas fa-file-alt"></i> Reports
+                        </a>
+                        <a href="dashboard.html#settings" class="dropdown-item">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="manufacturer.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-industry"></i> Manufacturers
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="manufacturer.html#portal" class="dropdown-item">
+                            <i class="fas fa-sign-in-alt"></i> Portal Login
+                        </a>
+                        <a href="manufacturer.html#register" class="dropdown-item">
+                            <i class="fas fa-user-plus"></i> Register
+                        </a>
+                        <a href="manufacturer.html#resources" class="dropdown-item">
+                            <i class="fas fa-book"></i> Resources
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="btn btn-outline" onclick="window.location.href='index.html#login'">Login</button>
+                <button class="btn btn-primary" onclick="window.location.href='index.html#signup'">Sign Up</button>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero verify-hero" id="verify-hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-right">
+                    <h1>Verify Your Medicine</h1>
+                    <p>Choose your preferred verification method to ensure your medicine is authentic and safe to use.</p>
+                    <div class="verification-methods">
+                        <div class="method-card" data-aos="fade-up" data-aos-delay="100">
+                            <div class="method-icon">
+                                <i class="fas fa-qrcode"></i>
+                            </div>
+                            <h3>QR Scanner</h3>
+                            <p>Scan the QR code on your medicine packaging for instant verification</p>
+                            <a href="#qr-scanner" class="btn btn-primary">Start Scanning</a>
+                        </div>
+                        
+                        <div class="method-card" data-aos="fade-up" data-aos-delay="200">
+                            <div class="method-icon">
+                                <i class="fas fa-sms"></i>
+                            </div>
+                            <h3>SMS Verification</h3>
+                            <p>Send the code via SMS for quick verification on any device</p>
+                            <a href="#sms-verify" class="btn btn-primary">Send SMS</a>
+                        </div>
+                        
+                        <div class="method-card" data-aos="fade-up" data-aos-delay="300">
+                            <div class="method-icon">
+                                <i class="fas fa-keyboard"></i>
+                            </div>
+                            <h3>Manual Entry</h3>
+                            <p>Enter the product code manually for detailed verification</p>
+                            <a href="#manual-verify" class="btn btn-primary">Enter Code</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-image" data-aos="fade-left">
+                    <div class="verification-illustration">
+                        <div class="phone-mockup">
+                            <div class="phone-frame">
+                                <div class="phone-screen">
+                                    <div class="app-header">
+                                        <h3>CertMed</h3>
+                                        <i class="fas fa-qrcode"></i>
+                                    </div>
+                                    <div class="verification-success">
+                                        <div class="success-icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <h4>Product Verified</h4>
+                                        <p>Authentic Medicine</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QR Scanner Section -->
+    <section class="verification-section" id="qr-scanner">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>QR Code Scanner</h2>
+                <p>Position the QR code within the scanner frame for automatic verification</p>
+            </div>
+            
+            <div class="scanner-container" data-aos="fade-up">
+                <div class="scanner-frame">
+                    <video id="qrVideo" class="scanner-video"></video>
+                    <div class="scanner-overlay">
+                        <div class="scanner-corners">
+                            <div class="corner top-left"></div>
+                            <div class="corner top-right"></div>
+                            <div class="corner bottom-left"></div>
+                            <div class="corner bottom-right"></div>
+                        </div>
+                        <div class="scanner-line"></div>
+                    </div>
+                </div>
+                
+                <div class="scanner-controls">
+                    <button class="btn btn-primary" onclick="startQRScanner()">
+                        <i class="fas fa-camera"></i> Start Scanner
+                    </button>
+                    <button class="btn btn-secondary" onclick="stopQRScanner()">
+                        <i class="fas fa-stop"></i> Stop Scanner
+                    </button>
+                    <button class="btn btn-outline" onclick="uploadQRImage()">
+                        <i class="fas fa-upload"></i> Upload Image
+                    </button>
+                </div>
+                
+                <div class="scanner-tips">
+                    <h4>Tips for best results:</h4>
+                    <ul>
+                        <li>Ensure good lighting conditions</li>
+                        <li>Hold the device steady</li>
+                        <li>Keep the QR code within the frame</li>
+                        <li>Clean the QR code if it's dirty or damaged</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SMS Verification Section -->
+    <section class="verification-section alt-bg" id="sms-verify">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>SMS Verification</h2>
+                <p>Enter your phone number and we'll send a verification code</p>
+            </div>
+            
+            <div class="sms-container" data-aos="fade-up">
+                <div class="sms-form">
+                    <form id="smsForm">
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <div class="input-group">
+                                <span class="input-prefix">+1</span>
+                                <input type="tel" id="phoneNumber" placeholder="(555) 123-4567" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="productCode">Product Code (Optional)</label>
+                            <input type="text" id="productCode" placeholder="Enter product code if available">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i> Send Verification Code
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="sms-verification" id="smsVerification" style="display: none;">
+                    <h3>Enter Verification Code</h3>
+                    <p>We've sent a 6-digit code to your phone</p>
+                    
+                    <form id="smsCodeForm">
+                        <div class="code-inputs">
+                            <input type="text" maxlength="1" class="code-input" required>
+                            <input type="text" maxlength="1" class="code-input" required>
+                            <input type="text" maxlength="1" class="code-input" required>
+                            <input type="text" maxlength="1" class="code-input" required>
+                            <input type="text" maxlength="1" class="code-input" required>
+                            <input type="text" maxlength="1" class="code-input" required>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-check"></i> Verify Code
+                        </button>
+                        
+                        <div class="resend-section">
+                            <p>Didn't receive the code?</p>
+                            <button type="button" class="btn btn-outline" onclick="resendSMSCode()">
+                                <i class="fas fa-redo"></i> Resend Code
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manual Verification Section -->
+    <section class="verification-section" id="manual-verify">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Manual Verification</h2>
+                <p>Enter the product details for comprehensive verification</p>
+            </div>
+            
+            <div class="manual-container" data-aos="fade-up">
+                <form id="manualForm" class="manual-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="manualCode">Product Code</label>
+                            <input type="text" id="manualCode" placeholder="e.g., QR_MED001_BATCH2024001" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="batchNumber">Batch Number</label>
+                            <input type="text" id="batchNumber" placeholder="e.g., BATCH2024001">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="expiryDate">Expiry Date</label>
+                            <input type="date" id="expiryDate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="manufacturer">Manufacturer</label>
+                            <select id="manufacturer">
+                                <option value="">Select Manufacturer</option>
+                                <option value="MediCorp Pharmaceuticals">MediCorp Pharmaceuticals</option>
+                                <option value="HealthPharma Ltd">HealthPharma Ltd</option>
+                                <option value="BioMed Solutions">BioMed Solutions</option>
+                                <option value="Global Pharma Inc">Global Pharma Inc</option>
+                                <option value="NutriHealth Labs">NutriHealth Labs</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productName">Product Name</label>
+                        <input type="text" id="productName" placeholder="e.g., Paracetamol 500mg">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-search"></i> Verify Product
+                        </button>
+                        <button type="button" class="btn btn-outline" onclick="clearManualForm()">
+                            <i class="fas fa-eraser"></i> Clear Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section" id="results" style="display: none;">
+        <div class="container">
+            <div class="result-container" data-aos="fade-up">
+                <div id="resultContent"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <div class="footer-logo">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>CertMed</span>
+                        </div>
+                        <p>Advanced medicine authentication and anti-counterfeit platform</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="#verify">Verify</a></li>
+                            <li><a href="catalog.html">Catalog</a></li>
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="manufacturer.html">Manufacturers</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Newsletter</h4>
+                        <p>Stay updated with our latest features and security updates</p>
+                        <form class="newsletter-form">
+                            <input type="email" placeholder="Enter your email">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 CertMed. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Page-specific verification functions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize verification page
+            initializeVerificationPage();
+            
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+        });
+
+        function initializeVerificationPage() {
+            // Setup SMS form
+            const smsForm = document.getElementById('smsForm');
+            if (smsForm) {
+                smsForm.addEventListener('submit', handleSMSVerification);
+            }
+
+            // Setup SMS code form
+            const smsCodeForm = document.getElementById('smsCodeForm');
+            if (smsCodeForm) {
+                smsCodeForm.addEventListener('submit', handleSMSCodeVerification);
+                setupCodeInputs();
+            }
+
+            // Setup manual form
+            const manualForm = document.getElementById('manualForm');
+            if (manualForm) {
+                manualForm.addEventListener('submit', handleManualVerification);
+            }
+            
+            // Setup QR scanner
+            setupQRScanner();
+        }
+
+        function handleSMSVerification(e) {
+            e.preventDefault();
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const productCode = document.getElementById('productCode').value;
+            
+            if (!phoneNumber) {
+                appState.showToast('Please enter your phone number', 'error');
+                return;
+            }
+
+            // Show verification section
+            document.getElementById('smsVerification').style.display = 'block';
+            
+            // Simulate sending SMS
+            const code = Math.floor(100000 + Math.random() * 900000).toString();
+            sessionStorage.setItem('smsCode', code);
+            sessionStorage.setItem('phoneNumber', phoneNumber);
+            
+            appState.showToast('Verification code sent successfully!', 'success');
+        }
+
+        function handleSMSCodeVerification(e) {
+            e.preventDefault();
+            const codeInputs = document.querySelectorAll('.code-input');
+            const enteredCode = Array.from(codeInputs).map(input => input.value).join('');
+            const storedCode = sessionStorage.getItem('smsCode');
+            
+            if (enteredCode === storedCode) {
+                appState.showToast('Verification successful!', 'success');
+                // Show verification result
+                showVerificationResult('success', 'Product verified via SMS');
+            } else {
+                appState.showToast('Invalid verification code', 'error');
+            }
+        }
+
+        function handleManualVerification(e) {
+            e.preventDefault();
+            const productCode = document.getElementById('manualCode').value;
+            
+            if (!productCode) {
+                appState.showToast('Please enter a product code', 'error');
+                return;
+            }
+
+            // Simulate verification
+            appState.showToast('Verifying product...', 'info');
+            
+            setTimeout(() => {
+                showVerificationResult('success', 'Product verified successfully');
+            }, 1500);
+        }
+
+        function setupCodeInputs() {
+            const codeInputs = document.querySelectorAll('.code-input');
+            
+            codeInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value && index < codeInputs.length - 1) {
+                        codeInputs[index + 1].focus();
+                    }
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        codeInputs[index - 1].focus();
+                    }
+                });
+            });
+        }
+
+        function showVerificationResult(status, message) {
+            const resultsSection = document.getElementById('results');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultsSection.style.display = 'block';
+            resultContent.innerHTML = `
+                <div class="result-card ${status}">
+                    <div class="result-icon">
+                        <i class="fas fa-${status === 'success' ? 'check-circle' : 'times-circle'}"></i>
+                    </div>
+                    <h3>${status === 'success' ? 'Verification Successful' : 'Verification Failed'}</h3>
+                    <p>${message}</p>
+                    <button class="btn btn-primary" onclick="window.location.reload()">Verify Another Product</button>
+                </div>
+            `;
+            
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function clearManualForm() {
+            document.getElementById('manualForm').reset();
+        }
+
+        function resendSMSCode() {
+            appState.showToast('Code resent successfully!', 'success');
+        }
+
+        function uploadQRImage() {
+            appState.showToast('Image upload feature coming soon!', 'info');
+        }
+
+        // QR Scanner functionality
+        let qrScanner = null;
+        let isScanning = false;
+
+        function setupQRScanner() {
+            const video = document.getElementById('qrVideo');
+            if (video) {
+                // Initialize QR Scanner
+                qrScanner = new QrScanner(
+                    video,
+                    result => handleQRScanResult(result),
+                    {
+                        highlightScanRegion: true,
+                        highlightCodeOutline: true,
+                    }
+                );
+            }
+        }
+
+        function startQRScanner() {
+            if (qrScanner && !isScanning) {
+                qrScanner.start().then(() => {
+                    isScanning = true;
+                    appState.showToast('QR Scanner started', 'success');
+                }).catch(error => {
+                    console.error('Failed to start QR scanner:', error);
+                    appState.showToast('Failed to start camera. Please check permissions.', 'error');
+                });
+            }
+        }
+
+        function stopQRScanner() {
+            if (qrScanner && isScanning) {
+                qrScanner.stop();
+                isScanning = false;
+                appState.showToast('QR Scanner stopped', 'info');
+            }
+        }
+
+        function handleQRScanResult(result) {
+            stopQRScanner();
+            const code = result.data;
+            appState.showToast('QR Code detected! Verifying...', 'info');
+            
+            // Simulate verification
+            setTimeout(() => {
+                showVerificationResult('success', `Product verified successfully: ${code}`);
+            }, 1500);
+        }
+
+        // Enhanced verification functions
+        function handleSMSVerification(e) {
+            e.preventDefault();
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const productCode = document.getElementById('productCode').value;
+            
+            if (!phoneNumber) {
+                appState.showToast('Please enter your phone number', 'error');
+                return;
+            }
+
+            // Validate phone number
+            const phoneRegex = /^\+?[\d\s\-\(\)]+$/;
+            if (!phoneRegex.test(phoneNumber)) {
+                appState.showToast('Please enter a valid phone number', 'error');
+                return;
+            }
+
+            // Show verification section
+            document.getElementById('smsVerification').style.display = 'block';
+            
+            // Simulate sending SMS
+            const code = Math.floor(100000 + Math.random() * 900000).toString();
+            sessionStorage.setItem('smsCode', code);
+            sessionStorage.setItem('phoneNumber', phoneNumber);
+            
+            appState.showToast(`Verification code sent to ${phoneNumber}!`, 'success');
+            
+            // Scroll to verification section
+            document.getElementById('smsVerification').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleSMSCodeVerification(e) {
+            e.preventDefault();
+            const codeInputs = document.querySelectorAll('.code-input');
+            const enteredCode = Array.from(codeInputs).map(input => input.value).join('');
+            const storedCode = sessionStorage.getItem('smsCode');
+            
+            if (enteredCode.length !== 6) {
+                appState.showToast('Please enter all 6 digits', 'error');
+                return;
+            }
+            
+            if (enteredCode === storedCode) {
+                appState.showToast('Verification successful!', 'success');
+                // Show verification result
+                showVerificationResult('success', 'Product verified via SMS');
+            } else {
+                appState.showToast('Invalid verification code', 'error');
+                // Clear inputs
+                codeInputs.forEach(input => input.value = '');
+                codeInputs[0].focus();
+            }
+        }
+
+        function handleManualVerification(e) {
+            e.preventDefault();
+            const productCode = document.getElementById('manualCode').value.trim();
+            const batchNumber = document.getElementById('batchNumber').value.trim();
+            const manufacturer = document.getElementById('manufacturer').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const productName = document.getElementById('productName').value.trim();
+            
+            if (!productCode) {
+                appState.showToast('Please enter a product code', 'error');
+                return;
+            }
+
+            // Validate product code format
+            if (productCode.length < 8) {
+                appState.showToast('Product code must be at least 8 characters', 'error');
+                return;
+            }
+
+            // Simulate verification
+            appState.showToast('Verifying product...', 'info');
+            
+            setTimeout(() => {
+                // Simulate different verification results based on code
+                let status = 'success';
+                let message = 'Product verified successfully';
+                
+                if (productCode.includes('FAKE') || productCode.includes('INVALID')) {
+                    status = 'error';
+                    message = 'Warning: This product appears to be counterfeit';
+                } else if (productCode.includes('EXPIRED')) {
+                    status = 'warning';
+                    message = 'Product verified but has expired';
+                }
+                
+                showVerificationResult(status, message);
+            }, 1500);
+        }
+
+        function setupCodeInputs() {
+            const codeInputs = document.querySelectorAll('.code-input');
+            
+            codeInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value && index < codeInputs.length - 1) {
+                        codeInputs[index + 1].focus();
+                    }
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        codeInputs[index - 1].focus();
+                    }
+                });
+                
+                // Only allow numbers
+                input.addEventListener('keypress', (e) => {
+                    if (!/[0-9]/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+            });
+        }
+
+        function showVerificationResult(status, message) {
+            const resultsSection = document.getElementById('results');
+            const resultContent = document.getElementById('resultContent');
+            
+            if (!resultsSection || !resultContent) return;
+            
+            let html = '';
+            
+            if (status === 'success') {
+                html = `
+                    <div class="result-card success fade-in">
+                        <div class="result-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="result-title">Verification Successful</h3>
+                        <p class="result-message">${message}</p>
+                        <div class="result-details">
+                            <h4>Verification Details:</h4>
+                            <p><strong>Verification ID:</strong> ${generateVerificationId()}</p>
+                            <p><strong>Timestamp:</strong> ${new Date().toLocaleString()}</p>
+                            <p><strong>Status:</strong> Authentic Product</p>
+                            <p><strong>Blockchain Verified:</strong> Yes</p>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-primary" onclick="downloadCertificate()">Download Certificate</button>
+                            <button class="btn btn-outline" onclick="shareResult()">Share Result</button>
+                            <button class="btn btn-secondary" onclick="window.location.reload()">Verify Another Product</button>
+                        </div>
+                    </div>
+                `;
+            } else if (status === 'warning') {
+                html = `
+                    <div class="result-card warning fade-in">
+                        <div class="result-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <h3 class="result-title">Verification Warning</h3>
+                        <p class="result-message">${message}</p>
+                        <div class="result-suggestions">
+                            <h4>Recommendations:</h4>
+                            <ul>
+                                <li>Check the expiry date before use</li>
+                                <li>Consult with your pharmacist</li>
+                                <li>Store according to instructions</li>
+                            </ul>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-primary" onclick="window.location.reload()">Verify Another Product</button>
+                            <button class="btn btn-outline" onclick="reportIssue()">Report Issue</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="result-card error fade-in">
+                        <div class="result-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <h3 class="result-title">Verification Failed</h3>
+                        <p class="result-message">${message}</p>
+                        <div class="result-suggestions">
+                            <h4>What to do:</h4>
+                            <ul>
+                                <li>Do not use this product</li>
+                                <li>Contact the manufacturer</li>
+                                <li>Report to regulatory authorities</li>
+                                <li>Keep the product for investigation</li>
+                            </ul>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-primary" onclick="window.location.reload()">Try Again</button>
+                            <button class="btn btn-outline" onclick="reportCounterfeit()">Report Counterfeit</button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            resultContent.innerHTML = html;
+            resultsSection.style.display = 'block';
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function generateVerificationId() {
+            return 'VER-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function downloadCertificate() {
+            appState.showToast('Certificate download feature coming soon!', 'info');
+        }
+
+        function shareResult() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'CertMed Verification Result',
+                    text: 'I verified a medicine using CertMed!',
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                appState.showToast('Link copied to clipboard!', 'success');
+            }
+        }
+
+        function reportIssue() {
+            appState.showToast('Report feature coming soon!', 'info');
+        }
+
+        function reportCounterfeit() {
+            appState.showToast('Counterfeit report submitted. Thank you for helping keep medicines safe!', 'success');
+        }
+    </script>
+</body>
+</html>

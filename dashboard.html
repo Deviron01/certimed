@@ -1,0 +1,1638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CertMed</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-enhanced.css">
+    
+    <!-- Dashboard Specific Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-color: #1f2937;
+            --light-color: #f9fafb;
+            --border-color: #e5e7eb;
+            --text-muted: #6b7280;
+            --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-brand h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .date-filter {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--light-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .date-filter input {
+            border: none;
+            background: transparent;
+            padding: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--dark-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--light-color);
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            min-height: 100vh;
+            margin-top: 70px;
+        }
+
+        /* Sidebar */
+        .dashboard-sidebar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 1rem;
+            position: fixed;
+            width: 250px;
+            height: calc(100vh - 70px);
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sidebar-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .sidebar-header h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+        }
+
+        .sidebar-nav i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content */
+        .dashboard-content {
+            margin-left: 250px;
+            padding: 2rem;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Dashboard Header */
+        .dashboard-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dashboard-title h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-title p {
+            color: var(--text-muted);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-action-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .quick-action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .quick-action-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .quick-action-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .quick-action-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .stat-change {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+        }
+
+        .stat-change.positive {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .stat-change.negative {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        /* Charts */
+        .chart-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chart-controls button {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .chart-controls button:hover,
+        .chart-controls button.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Data Table */
+        .data-table {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            background: var(--light-color);
+            font-weight: 600;
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        .data-table tr:hover {
+            background: var(--light-color);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-color);
+        }
+
+        .status-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        /* Activity Feed */
+        .recent-activity {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: var(--dark-color);
+        }
+
+        .activity-time {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 0.5rem;
+        }
+
+        .close-btn:hover {
+            color: var(--dark-color);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Toast Notifications */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 3000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.success {
+            background: var(--success-color);
+        }
+
+        .toast.error {
+            background: var(--danger-color);
+        }
+
+        .toast.info {
+            background: var(--primary-color);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-sidebar {
+                position: fixed;
+                left: -250px;
+                transition: left 0.3s ease;
+                z-index: 999;
+            }
+            
+            .dashboard-sidebar.active {
+                left: 0;
+            }
+            
+            .dashboard-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .dashboard-header {
+                padding: 1rem;
+            }
+            
+            .dashboard-header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-controls {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="header-brand">
+            <i class="fas fa-shield-alt" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+            <h1>CertMed Dashboard</h1>
+        </div>
+        <div class="header-actions">
+            <div class="date-filter">
+                <label>From:</label>
+                <input type="date" id="startDate" onchange="updateDateRange()">
+                <label>To:</label>
+                <input type="date" id="endDate" onchange="updateDateRange()">
+            </div>
+            <button class="btn btn-primary" onclick="exportData()">
+                <i class="fas fa-download"></i> Export
+            </button>
+            <button class="btn btn-outline" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i> Home
+            </button>
+        </div>
+    </header>
+
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <h3>Dashboard</h3>
+                <p>Welcome back, John!</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <li>
+                    <a href="#analytics" class="active" onclick="navigateToSection('analytics', this)">
+                        <i class="fas fa-chart-bar"></i>
+                        Analytics
+                    </a>
+                </li>
+                <li>
+                    <a href="#verifications" onclick="navigateToSection('verifications', this)">
+                        <i class="fas fa-qrcode"></i>
+                        Verifications
+                    </a>
+                </li>
+                <li>
+                    <a href="#reports" onclick="navigateToSection('reports', this)">
+                        <i class="fas fa-file-alt"></i>
+                        Reports
+                    </a>
+                </li>
+                <li>
+                    <a href="#products" onclick="quickAction('add-product')">
+                        <i class="fas fa-pills"></i>
+                        Products
+                    </a>
+                </li>
+                <li>
+                    <a href="#users" onclick="quickAction('users')">
+                        <i class="fas fa-users"></i>
+                        Users
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings" onclick="openSettingsModal()">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+                <li>
+                    <a href="#help" onclick="showToast('Help documentation coming soon!', 'info')">
+                        <i class="fas fa-question-circle"></i>
+                        Help
+                    </a>
+                </li>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-content">
+            <!-- Dashboard Header Content -->
+            <div class="dashboard-header-content">
+                <div class="dashboard-title">
+                    <h2>Analytics Dashboard</h2>
+                    <p>Real-time monitoring and insights</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-success" onclick="refreshData()">
+                        <i class="fas fa-sync"></i> Refresh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <div class="quick-action-card" onclick="quickAction('verify')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3>Quick Verify</h3>
+                    <p>Verify a medicine instantly</p>
+                </div>
+                <div class="quick-action-card" onclick="quickAction('add-product')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <h3>Add Product</h3>
+                    <p>Register new medicine</p>
+                </div>
+                <div class="quick-action-card" onclick="quickAction('report')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Generate Report</h3>
+                    <p>Create detailed analytics</p>
+                </div>
+                <div class="quick-action-card" onclick="quickAction('users')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Manage Users</h3>
+                    <p>User administration</p>
+                </div>
+            </div>
+
+            <!-- Analytics Section -->
+            <section id="analytics">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="stat-value" data-target="15420">0</div>
+                        <div class="stat-label">Total Verifications</div>
+                        <div class="stat-change positive">+12%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value" data-target="3248">0</div>
+                        <div class="stat-label">Active Users</div>
+                        <div class="stat-change positive">+8%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-value" data-target="14890">0</div>
+                        <div class="stat-label">Authentic Products</div>
+                        <div class="stat-change positive">+15%</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-value" data-target="530">0</div>
+                        <div class="stat-label">Counterfeits Detected</div>
+                        <div class="stat-change negative">-3%</div>
+                    </div>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Verification Trends</h3>
+                        <div class="chart-controls">
+                            <button class="active" onclick="updateChart('week', this)">Week</button>
+                            <button onclick="updateChart('month', this)">Month</button>
+                            <button onclick="updateChart('year', this)">Year</button>
+                        </div>
+                    </div>
+                    <canvas id="verificationChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Verification Methods</h3>
+                    </div>
+                    <canvas id="methodsChart"></canvas>
+                </div>
+            </section>
+
+            <!-- Recent Verifications Table -->
+            <section id="verifications">
+                <div class="chart-header">
+                    <h3 class="chart-title">Recent Verifications</h3>
+                    <button class="btn btn-primary" onclick="addNewVerification()">
+                        <i class="fas fa-plus"></i> Add Verification
+                    </button>
+                </div>
+
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Product Name</th>
+                                <th>Manufacturer</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="verificationsTableBody">
+                            <tr>
+                                <td>#VER001</td>
+                                <td>Paracetamol 500mg</td>
+                                <td>MediLab</td>
+                                <td><i class="fas fa-qrcode"></i> QR Scanner</td>
+                                <td><span class="status-badge status-success">Authentic</span></td>
+                                <td>2024-01-15 14:30</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" onclick="viewVerification('VER001')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#VER002</td>
+                                <td>Amoxicillin 250mg</td>
+                                <td>HealthCorp</td>
+                                <td><i class="fas fa-sms"></i> SMS</td>
+                                <td><span class="status-badge status-warning">Expired</span></td>
+                                <td>2024-01-15 13:45</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" onclick="viewVerification('VER002')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#VER003</td>
+                                <td>Ibuprofen 400mg</td>
+                                <td>PharmaTech</td>
+                                <td><i class="fas fa-keyboard"></i> Manual</td>
+                                <td><span class="status-badge status-danger">Counterfeit</span></td>
+                                <td>2024-01-15 12:20</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" onclick="viewVerification('VER003')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#VER004</td>
+                                <td>Vitamin D3</td>
+                                <td>NutraLife</td>
+                                <td><i class="fas fa-qrcode"></i> QR Scanner</td>
+                                <td><span class="status-badge status-success">Authentic</span></td>
+                                <td>2024-01-15 11:15</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" onclick="viewVerification('VER004')">View</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#VER005</td>
+                                <td>Aspirin 100mg</td>
+                                <td>MediCorp</td>
+                                <td><i class="fas fa-sms"></i> SMS</td>
+                                <td><span class="status-badge status-success">Authentic</span></td>
+                                <td>2024-01-15 10:30</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary" onclick="viewVerification('VER005')">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section id="reports">
+                <div class="chart-header">
+                    <h3 class="chart-title">Recent Activity</h3>
+                    <button class="btn btn-outline" onclick="clearActivity()">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                </div>
+
+                <div class="recent-activity" id="activityFeed">
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: var(--success-color);">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Product Verified Successfully</div>
+                            <div class="activity-time">2 minutes ago - QR Scanner</div>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: var(--primary-color);">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">New User Registration</div>
+                            <div class="activity-time">15 minutes ago - John Doe</div>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: var(--warning-color);">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Suspicious Product Detected</div>
+                            <div class="activity-time">1 hour ago - Manual Entry</div>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: var(--secondary-color);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Weekly Report Generated</div>
+                            <div class="activity-time">3 hours ago - Automated</div>
+                        </div>
+                    </div>
+
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: var(--danger-color);">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Verification Failed</div>
+                            <div class="activity-time">5 hours ago - Invalid Code</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="verificationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Verification Details</h2>
+                <button class="close-btn" onclick="closeModal('verificationModal')">&times;</button>
+            </div>
+            <div id="verificationDetails"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="addProductModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Product</h2>
+                <button class="close-btn" onclick="closeModal('addProductModal')">&times;</button>
+            </div>
+            <form onsubmit="addNewProduct(event)">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" required placeholder="Enter product name">
+                </div>
+                <div class="form-group">
+                    <label>Manufacturer</label>
+                    <input type="text" required placeholder="Enter manufacturer name">
+                </div>
+                <div class="form-group">
+                    <label>Dosage</label>
+                    <input type="text" required placeholder="e.g., 500mg">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select required>
+                        <option value="">Select category</option>
+                        <option value="antibiotics">Antibiotics</option>
+                        <option value="pain-relief">Pain Relief</option>
+                        <option value="vitamins">Vitamins</option>
+                        <option value="chronic">Chronic Conditions</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                    <button type="button" class="btn btn-outline" onclick="closeModal('addProductModal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="close-btn" onclick="closeModal('settingsModal')">&times;</button>
+            </div>
+            
+            <div class="settings-group">
+                <h3>Notifications</h3>
+                <div class="setting-item">
+                    <span>Email Notifications</span>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)"></div>
+                </div>
+                <div class="setting-item">
+                    <span>SMS Alerts</span>
+                    <div class="toggle-switch" onclick="toggleSetting(this)"></div>
+                </div>
+                <div class="setting-item">
+                    <span>Browser Notifications</span>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)"></div>
+                </div>
+            </div>
+            
+            <div class="settings-group">
+                <h3>Data & Privacy</h3>
+                <div class="setting-item">
+                    <span>Auto-refresh Data</span>
+                    <div class="toggle-switch active" onclick="toggleSetting(this)"></div>
+                </div>
+                <div class="setting-item">
+                    <span>Share Analytics</span>
+                    <div class="toggle-switch" onclick="toggleSetting(this)"></div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                <button class="btn btn-outline" onclick="closeModal('settingsModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer"></div>
+
+    <script>
+        // Dashboard JavaScript
+        let verificationChart, methodsChart;
+        let currentPeriod = 'week';
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboard();
+        });
+
+        function initializeDashboard() {
+            initializeCharts();
+            animateStats();
+            setupEventListeners();
+            startRealTimeUpdates();
+        }
+
+        // Initialize Charts
+        function initializeCharts() {
+            // Verification Trends Chart
+            const ctx1 = document.getElementById('verificationChart').getContext('2d');
+            verificationChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Verifications',
+                        data: [320, 450, 380, 520, 480, 590, 420],
+                        borderColor: '#2563eb',
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Methods Chart
+            const ctx2 = document.getElementById('methodsChart').getContext('2d');
+            methodsChart = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['QR Scanner', 'SMS', 'Manual Entry'],
+                    datasets: [{
+                        data: [65, 25, 10],
+                        backgroundColor: ['#2563eb', '#10b981', '#f59e0b']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Animate Statistics
+        function animateStats() {
+            const statValues = document.querySelectorAll('.stat-value');
+            
+            statValues.forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current).toLocaleString();
+                }, 20);
+            });
+        }
+
+        // Update Chart Period
+        function updateChart(period, button) {
+            currentPeriod = period;
+            
+            // Update active button
+            document.querySelectorAll('.chart-controls button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+            
+            // Update chart data based on period
+            let labels, data;
+            switch(period) {
+                case 'week':
+                    labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                    data = [320, 450, 380, 520, 480, 590, 420];
+                    break;
+                case 'month':
+                    labels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                    data = [2100, 2800, 2400, 3200];
+                    break;
+                case 'year':
+                    labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                    data = [8500, 9200, 8800, 9500, 10200, 9800, 10500, 11000, 10800, 11500, 11200, 12000];
+                    break;
+            }
+            
+            verificationChart.data.labels = labels;
+            verificationChart.data.datasets[0].data = data;
+            verificationChart.update();
+            
+            showToast(`Chart updated to ${period} view`, 'info');
+        }
+
+        // Navigation
+        function navigateToSection(section, link) {
+            // Update active link
+            document.querySelectorAll('.sidebar-nav a').forEach(a => {
+                a.classList.remove('active');
+            });
+            link.classList.add('active');
+            
+            // Scroll to section
+            const element = document.getElementById(section);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Quick Actions
+        function quickAction(action) {
+            switch(action) {
+                case 'verify':
+                    window.location.href = 'verify.html';
+                    break;
+                case 'add-product':
+                    openModal('addProductModal');
+                    break;
+                case 'report':
+                    generateReport();
+                    break;
+                case 'users':
+                    showToast('User management coming soon!', 'info');
+                    break;
+            }
+        }
+
+        // View Verification Details
+        function viewVerification(id) {
+            const verificationData = {
+                'VER001': {
+                    product: 'Paracetamol 500mg',
+                    manufacturer: 'MediLab',
+                    method: 'QR Scanner',
+                    status: 'Authentic',
+                    date: '2024-01-15 14:30',
+                    user: 'John Doe',
+                    location: 'New York, USA'
+                },
+                'VER002': {
+                    product: 'Amoxicillin 250mg',
+                    manufacturer: 'HealthCorp',
+                    method: 'SMS',
+                    status: 'Expired',
+                    date: '2024-01-15 13:45',
+                    user: 'Jane Smith',
+                    location: 'Los Angeles, USA'
+                },
+                'VER003': {
+                    product: 'Ibuprofen 400mg',
+                    manufacturer: 'PharmaTech',
+                    method: 'Manual',
+                    status: 'Counterfeit',
+                    date: '2024-01-15 12:20',
+                    user: 'Bob Johnson',
+                    location: 'Chicago, USA'
+                },
+                'VER004': {
+                    product: 'Vitamin D3',
+                    manufacturer: 'NutraLife',
+                    method: 'QR Scanner',
+                    status: 'Authentic',
+                    date: '2024-01-15 11:15',
+                    user: 'Alice Brown',
+                    location: 'Houston, USA'
+                },
+                'VER005': {
+                    product: 'Aspirin 100mg',
+                    manufacturer: 'MediCorp',
+                    method: 'SMS',
+                    status: 'Authentic',
+                    date: '2024-01-15 10:30',
+                    user: 'Charlie Wilson',
+                    location: 'Phoenix, USA'
+                }
+            };
+            
+            const data = verificationData[id];
+            if (data) {
+                const detailsHtml = `
+                    <div class="verification-details">
+                        <div class="detail-row">
+                            <strong>Product:</strong> ${data.product}
+                        </div>
+                        <div class="detail-row">
+                            <strong>Manufacturer:</strong> ${data.manufacturer}
+                        </div>
+                        <div class="detail-row">
+                            <strong>Verification Method:</strong> ${data.method}
+                        </div>
+                        <div class="detail-row">
+                            <strong>Status:</strong> <span class="status-badge status-${data.status.toLowerCase() === 'authentic' ? 'success' : data.status.toLowerCase() === 'expired' ? 'warning' : 'danger'}">${data.status}</span>
+                        </div>
+                        <div class="detail-row">
+                            <strong>Date:</strong> ${data.date}
+                        </div>
+                        <div class="detail-row">
+                            <strong>Verified by:</strong> ${data.user}
+                        </div>
+                        <div class="detail-row">
+                            <strong>Location:</strong> ${data.location}
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-primary" onclick="downloadCertificate('${data.product}')">Download Certificate</button>
+                        <button class="btn btn-outline" onclick="closeModal('verificationModal')">Close</button>
+                    </div>
+                `;
+                
+                document.getElementById('verificationDetails').innerHTML = detailsHtml;
+                openModal('verificationModal');
+            }
+        }
+
+        // Add New Verification
+        function addNewVerification() {
+            showToast('Add verification feature coming soon!', 'info');
+        }
+
+        // Add New Product
+        function addNewProduct(event) {
+            event.preventDefault();
+            showToast('Product added successfully!', 'success');
+            closeModal('addProductModal');
+        }
+
+        // Export Data
+        function exportData() {
+            showToast('Preparing data export...', 'info');
+            
+            setTimeout(() => {
+                const csvData = generateCSVExport();
+                downloadCSV(csvData, 'certmed-dashboard-export.csv');
+                showToast('Data exported successfully!', 'success');
+            }, 1500);
+        }
+
+        function generateCSVExport() {
+            const headers = ['ID', 'Product Name', 'Manufacturer', 'Method', 'Status', 'Date'];
+            const rows = [
+                ['VER001', 'Paracetamol 500mg', 'MediLab', 'QR Scanner', 'Authentic', '2024-01-15 14:30'],
+                ['VER002', 'Amoxicillin 250mg', 'HealthCorp', 'SMS', 'Expired', '2024-01-15 13:45'],
+                ['VER003', 'Ibuprofen 400mg', 'PharmaTech', 'Manual', 'Counterfeit', '2024-01-15 12:20'],
+                ['VER004', 'Vitamin D3', 'NutraLife', 'QR Scanner', 'Authentic', '2024-01-15 11:15'],
+                ['VER005', 'Aspirin 100mg', 'MediCorp', 'SMS', 'Authentic', '2024-01-15 10:30']
+            ];
+            
+            return [headers, ...rows].map(row => row.join(',')).join('\n');
+        }
+
+        function downloadCSV(csvData, filename) {
+            const blob = new Blob([csvData], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', filename);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Generate Report
+        function generateReport() {
+            showToast('Generating report...', 'info');
+            
+            setTimeout(() => {
+                const reportData = {
+                    title: 'CertMed Analytics Report',
+                    date: new Date().toLocaleDateString(),
+                    totalVerifications: 15420,
+                    authenticProducts: 14890,
+                    counterfeitDetected: 530,
+                    expiredProducts: 200
+                };
+                
+                downloadJSON(reportData, 'certmed-report.json');
+                showToast('Report generated successfully!', 'success');
+            }, 2000);
+        }
+
+        function downloadJSON(data, filename) {
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', filename);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+
+        // Download Certificate
+        function downloadCertificate(product) {
+            showToast(`Downloading certificate for ${product}...`, 'info');
+            setTimeout(() => {
+                showToast('Certificate downloaded successfully!', 'success');
+            }, 1500);
+        }
+
+        // Date Range Filter
+        function updateDateRange() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if (startDate && endDate) {
+                showToast(`Filtering data from ${startDate} to ${endDate}`, 'info');
+                // Update charts based on date range
+                updateChartsForDateRange(startDate, endDate);
+            }
+        }
+
+        function updateChartsForDateRange(startDate, endDate) {
+            // Generate new data based on date range
+            const daysDiff = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
+            const newData = Array.from({length: Math.min(daysDiff, 30)}, () => Math.floor(Math.random() * 500) + 100);
+            
+            verificationChart.data.datasets[0].data = newData;
+            verificationChart.update();
+        }
+
+        // Refresh Data
+        function refreshData() {
+            showToast('Refreshing dashboard data...', 'info');
+            
+            // Update stats with new random values
+            document.querySelectorAll('.stat-value').forEach(stat => {
+                const target = parseInt(stat.getAttribute('data-target'));
+                const newValue = target + Math.floor(Math.random() * 100) - 50;
+                stat.textContent = newValue.toLocaleString();
+            });
+            
+            // Update charts
+            verificationChart.data.datasets[0].data = verificationChart.data.datasets[0].data.map(
+                val => val + Math.floor(Math.random() * 100) - 50
+            );
+            verificationChart.update();
+            
+            setTimeout(() => {
+                showToast('Data refreshed successfully!', 'success');
+            }, 1000);
+        }
+
+        // Clear Activity
+        function clearActivity() {
+            const activityFeed = document.getElementById('activityFeed');
+            activityFeed.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 2rem;">No recent activity</p>';
+            showToast('Activity feed cleared', 'info');
+        }
+
+        // Settings
+        function openSettingsModal() {
+            document.getElementById('settingsModal').classList.add('active');
+        }
+
+        function saveSettings() {
+            showToast('Settings saved successfully!', 'success');
+            closeModal('settingsModal');
+        }
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Toggle Settings
+        function toggleSetting(element) {
+            element.classList.toggle('active');
+        }
+
+        // Toast Notifications
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 300);
+            }, 3000);
+        }
+
+        // Real-time Updates
+        function startRealTimeUpdates() {
+            // Add new activity every 10 seconds
+            setInterval(() => {
+                addNewActivity();
+            }, 10000);
+            
+            // Update stats every 5 seconds
+            setInterval(() => {
+                updateRandomStat();
+            }, 5000);
+        }
+
+        function addNewActivity() {
+            const activities = [
+                { icon: 'fa-check', color: 'var(--success-color)', title: 'Product Verified Successfully', time: 'Just now', method: 'QR Scanner' },
+                { icon: 'fa-user-plus', color: 'var(--primary-color)', title: 'New User Registration', time: 'Just now', user: 'New User' },
+                { icon: 'fa-exclamation-triangle', color: 'var(--warning-color)', title: 'Suspicious Product Detected', time: 'Just now', method: 'Manual Entry' },
+                { icon: 'fa-chart-line', color: 'var(--secondary-color)', title: 'Report Generated', time: 'Just now', type: 'Automated' },
+                { icon: 'fa-times', color: 'var(--danger-color)', title: 'Verification Failed', time: 'Just now', reason: 'Invalid Code' }
+            ];
+            
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            const activityFeed = document.getElementById('activityFeed');
+            
+            const newActivity = document.createElement('div');
+            newActivity.className = 'activity-item';
+            newActivity.style.opacity = '0';
+            newActivity.innerHTML = `
+                <div class="activity-icon" style="background: ${randomActivity.color};">
+                    <i class="fas ${randomActivity.icon}"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">${randomActivity.title}</div>
+                    <div class="activity-time">${randomActivity.time}</div>
+                </div>
+            `;
+            
+            // Add to top of activity feed
+            if (activityFeed.firstChild) {
+                activityFeed.insertBefore(newActivity, activityFeed.firstChild);
+            } else {
+                activityFeed.appendChild(newActivity);
+            }
+            
+            // Fade in animation
+            setTimeout(() => {
+                newActivity.style.opacity = '1';
+                newActivity.style.transition = 'opacity 0.5s ease';
+            }, 100);
+            
+            // Remove old activities if too many
+            const allActivities = activityFeed.querySelectorAll('.activity-item');
+            if (allActivities.length > 5) {
+                allActivities[allActivities.length - 1].remove();
+            }
+        }
+
+        function updateRandomStat() {
+            const statValues = document.querySelectorAll('.stat-value');
+            const randomStat = statValues[Math.floor(Math.random() * statValues.length)];
+            const currentValue = parseInt(randomStat.textContent.replace(/,/g, ''));
+            const change = Math.floor(Math.random() * 20) - 10;
+            const newValue = Math.max(0, currentValue + change);
+            
+            randomStat.textContent = newValue.toLocaleString();
+            
+            // Update the data-target attribute
+            randomStat.setAttribute('data-target', newValue);
+        }
+
+        // Setup Event Listeners
+        function setupEventListeners() {
+            // Close modals when clicking outside
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                        modal.classList.remove('active');
+                    });
+                }
+                
+                if (e.ctrlKey && e.key === 'r') {
+                    e.preventDefault();
+                    refreshData();
+                }
+                
+                if (e.ctrlKey && e.key === 'e') {
+                    e.preventDefault();
+                    exportData();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
