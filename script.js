@@ -3,13 +3,365 @@
 
 // Global Configuration
 const CONFIG = {
-    API_ENDPOINT: 'https://api.certmed.com/v1',
-    DEMO_MODE: true,
+    API_ENDPOINT: 'http://localhost:3000/api',
+    DEMO_MODE: false,
     ANIMATION_DURATION: 300,
     TOAST_DURATION: 5000,
     SESSION_TIMEOUT: 3600000, // 1 hour
     MAX_UPLOAD_SIZE: 5 * 1024 * 1024, // 5MB
     SUPPORTED_FORMATS: ['jpg', 'jpeg', 'png', 'webp']
+};
+
+// Initialize homepage with backend data
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Homepage loading - initializing...');
+    
+    console.log('Homepage initialization complete');
+});
+
+// Demo data initialization removed - static values displayed in HTML
+
+// Backend data loading removed - static values displayed in HTML
+
+// Counter animations removed - static values displayed in HTML
+
+// Initialize testimonial slider
+function initializeTestimonials() {
+    const testimonials = document.querySelectorAll('.testimonial-card');
+    const prevBtn = document.querySelector('.testimonial-prev');
+    const nextBtn = document.querySelector('.testimonial-next');
+    
+    if (!testimonials.length) return;
+    
+    let currentIndex = 0;
+    
+    function showTestimonial(index) {
+        testimonials.forEach((testimonial, i) => {
+            testimonial.classList.toggle('active', i === index);
+        });
+    }
+    
+    window.changeTestimonial = function(direction) {
+        currentIndex = (currentIndex + direction + testimonials.length) % testimonials.length;
+        showTestimonial(currentIndex);
+    };
+    
+    // Auto-rotate testimonials
+    setInterval(() => {
+        changeTestimonial(1);
+    }, 5000);
+}
+
+// Update featured products display
+function updateFeaturedProducts(products) {
+    const featuredSection = document.querySelector('.featured-products');
+    if (!featuredSection) return;
+    
+    // Update featured products grid
+    const productsHtml = products.slice(0, 3).map(product => `
+        <div class="product-card">
+            <div class="product-image">
+                <img src="${product.imageUrl || 'assets/images/product-placeholder.jpg'}" alt="${product.name}">
+            </div>
+            <div class="product-info">
+                <h4>${product.name}</h4>
+                <p>${product.manufacturer}</p>
+                <div class="product-status ${product.verified ? 'verified' : 'pending'}">
+                    <i class="fas ${product.verified ? 'fa-check-circle' : 'fa-clock'}"></i>
+                    ${product.verified ? 'Verified' : 'Pending'}
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    featuredSection.innerHTML = productsHtml;
+}
+
+// Update recent activity display
+function updateRecentActivity(verifications) {
+    const activitySection = document.querySelector('.recent-activity');
+    if (!activitySection) return;
+    
+    const activityHtml = verifications.slice(0, 5).map(verification => `
+        <div class="activity-item">
+            <div class="activity-icon ${verification.status}">
+                <i class="fas ${verification.status === 'success' ? 'fa-check' : 'fa-exclamation'}"></i>
+            </div>
+            <div class="activity-details">
+                <div class="activity-title">${verification.productName || 'Unknown Product'}</div>
+                <div class="activity-time">${new Date(verification.timestamp).toLocaleString()}</div>
+            </div>
+        </div>
+    `).join('');
+    
+    activitySection.innerHTML = activityHtml;
+}
+
+// Authentication handlers
+window.handleLogin = async function(event) {
+    event.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    
+    try {
+        const response = await apiCall('/auth/login', 'POST', { email, password });
+        localStorage.setItem('authToken', response.token);
+        showToast('Login successful!', 'success');
+        closeModal('loginModal');
+        window.location.href = 'dashboard.html';
+    } catch (error) {
+        showToast('Login failed: ' + error.message, 'error');
+    }
+};
+
+window.handleSignup = async function(event) {
+    event.preventDefault();
+    const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('signupEmail').value,
+        password: document.getElementById('signupPassword').value,
+        company: document.getElementById('company').value
+    };
+    
+    try {
+        await apiCall('/auth/register', 'POST', formData);
+        showToast('Account created successfully!', 'success');
+        closeModal('signupModal');
+        openLoginModal();
+    } catch (error) {
+        showToast('Registration failed: ' + error.message, 'error');
+    }
+};
+
+window.handleContactForm = async function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    
+    try {
+        await apiCall('/contact', 'POST', data);
+        showToast('Message sent successfully!', 'success');
+        event.target.reset();
+    } catch (error) {
+        showToast('Failed to send message: ' + error.message, 'error');
+    }
+};
+
+// Modal management
+window.openSignupModal = function() {
+    document.getElementById('signupModal').style.display = 'block';
+};
+
+window.openLoginModal = function() {
+    document.getElementById('loginModal').style.display = 'block';
+};
+
+window.closeModal = function(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+};
+
+window.switchToSignup = function() {
+    closeModal('loginModal');
+    openSignupModal();
+};
+
+window.switchToLogin = function() {
+    closeModal('signupModal');
+    openLoginModal();
+};
+
+// Start Verification button handler
+window.navigateToVerify = function() {
+    // Navigate to verification page
+    window.location.href = 'verify.html';
+};
+
+// Watch Demo button handler
+window.playDemo = function() {
+    // Create and show demo video modal
+    const demoModal = document.createElement('div');
+    demoModal.className = 'modal';
+    demoModal.innerHTML = `
+        <div class="modal-content modal-lg">
+            <span class="close" onclick="this.closest('.modal').remove()">&times;</span>
+            <div class="modal-body">
+                <h2>CertMed Demo</h2>
+                <div class="demo-video">
+                    <div class="demo-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>Interactive Demo</h3>
+                        <p>See how CertMed works in real-time</p>
+                        <div class="demo-steps">
+                            <div class="demo-step">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Scan QR Code</div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Instant Verification</div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Get Results</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="this.closest('.modal').remove(); navigateToVerify();">
+                            Try It Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(demoModal);
+    demoModal.style.display = 'block';
+};
+
+// Demo request handler
+window.requestDemo = async function() {
+    const email = prompt('Please enter your email address for demo access:');
+    if (!email) return;
+    
+    try {
+        await apiCall('/demo/request', 'POST', { email });
+        showToast('Demo request submitted! We\'ll contact you soon.', 'success');
+    } catch (error) {
+        showToast('Demo request failed: ' + error.message, 'error');
+    }
+};
+
+// Social media handlers
+window.handleSocialMediaClick = function(platform) {
+    const urls = {
+        facebook: 'https://facebook.com/certmed',
+        twitter: 'https://twitter.com/certmed',
+        linkedin: 'https://linkedin.com/company/certmed',
+        instagram: 'https://instagram.com/certmed'
+    };
+    
+    window.open(urls[platform], '_blank');
+};
+
+// Footer link handlers
+window.handleFooterLink = function(link) {
+    showToast(`Opening ${link}...`, 'info');
+    // In production, these would navigate to actual pages
+    setTimeout(() => {
+        console.log(`Navigate to ${link}`);
+    }, 1000);
+};
+
+// QR Scanner functionality
+window.openQRScanner = function() {
+    document.getElementById('qrModal').style.display = 'block';
+    startQRScanner();
+};
+
+window.closeQRModal = function() {
+    document.getElementById('qrModal').style.display = 'none';
+    stopQRScanner();
+};
+
+// Manual verification
+window.openManualModal = function() {
+    document.getElementById('manualModal').style.display = 'block';
+};
+
+window.closeManualModal = function() {
+    document.getElementById('manualModal').style.display = 'none';
+};
+
+window.handleManualVerification = async function(event) {
+    event.preventDefault();
+    const code = document.getElementById('manualCode').value;
+    
+    try {
+        const response = await apiCall('/verify/manual', 'POST', { code });
+        showVerificationResult(response);
+        closeManualModal();
+    } catch (error) {
+        showToast('Verification failed: ' + error.message, 'error');
+    }
+};
+
+// Show verification results
+function showVerificationResult(result) {
+    const resultsSection = document.getElementById('results');
+    const resultCard = document.getElementById('resultCard');
+    
+    resultCard.innerHTML = `
+        <div class="result-status ${result.status}">
+            <i class="fas ${result.status === 'success' ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i>
+            <h3>${result.status === 'success' ? 'Product Verified' : 'Verification Failed'}</h3>
+        </div>
+        <div class="result-details">
+            <p><strong>Product:</strong> ${result.product?.name || 'Unknown'}</p>
+            <p><strong>Manufacturer:</strong> ${result.product?.manufacturer || 'Unknown'}</p>
+            <p><strong>Batch Number:</strong> ${result.product?.batchNumber || 'Unknown'}</p>
+            <p><strong>Expiry Date:</strong> ${result.product?.expiryDate || 'Unknown'}</p>
+        </div>
+    `;
+    
+    resultsSection.style.display = 'block';
+    resultsSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Initialize animations
+function initializeAnimations() {
+    // AOS initialization
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+    }
+}
+
+// Toast notification system
+function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => toast.classList.add('show'), 100);
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// API helper functions
+const apiCall = async (endpoint, method = 'GET', data = null, requiresAuth = false) => {
+    const options = {
+        method,
+        headers: {
+            'Content-Type': 'application/json',
+        ...(requiresAuth && {
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        })
+        }
+    };
+    
+    if (data && method !== 'GET') {
+        options.body = JSON.stringify(data);
+    }
+    
+    const response = await fetch(`${CONFIG.API_ENDPOINT}${endpoint}`, options);
+    const result = await response.json();
+    
+    if (!response.ok) {
+        throw new Error(result.error || 'API call failed');
+    }
+    
+    return result;
 };
 
 // Advanced Product Database with Extended Features
@@ -1531,39 +1883,6 @@ function setupMobileAppInteractions() {
     });
     
     appFeatures.forEach(feature => observer.observe(feature));
-}
-
-// Enhanced CTA statistics animation
-function setupCTAStats() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    const animateNumber = (element, target) => {
-        const duration = 2000;
-        const start = 0;
-        const increment = target / (duration / 16);
-        let current = start;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            element.textContent = Math.floor(current).toLocaleString();
-        }, 16);
-    };
-    
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = parseInt(entry.target.dataset.target);
-                animateNumber(entry.target, target);
-                statsObserver.unobserve(entry.target);
-            }
-        });
-    });
-    
-    statNumbers.forEach(stat => statsObserver.observe(stat));
 }
 
 // Enhanced form validation

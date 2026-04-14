@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Test - CertMed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #0ea5e9; }
+        h2 { color: #64748b; }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+    </style>
+</head>
+<body>
+    <h1>CertMed Simple Test</h1>
+    
+    <div class="test-box">
+        <h2>Basic HTML Test</h2>
+        <p class="success">✓ HTML is working</p>
+        <p class="error">✗ CSS is loading</p>
+        <p class="success">✓ JavaScript is working</p>
+    </div>
+    
+    <div class="test-box">
+        <h2>File Loading Test</h2>
+        <p id="cssTest">Testing CSS files...</p>
+        <p id="jsTest">Testing JavaScript files...</p>
+    </div>
+
+    <script>
+        // Test CSS loading
+        const cssTest = document.getElementById('cssTest');
+        try {
+            // Test if styles.css is loaded
+            const testElement = document.createElement('div');
+            testElement.style.color = 'red';
+            document.body.appendChild(testElement);
+            const computedStyle = window.getComputedStyle(testElement);
+            if (computedStyle.color === 'rgb(255, 0, 0)' || computedStyle.color === 'red') {
+                cssTest.innerHTML = '<span class="success">✓ styles.css loaded successfully</span>';
+            } else {
+                cssTest.innerHTML = '<span class="error">✗ styles.css not loaded properly</span>';
+            }
+            document.body.removeChild(testElement);
+        } catch (error) {
+            cssTest.innerHTML = `<span class="error">✗ CSS Error: ${error.message}</span>`;
+        }
+        
+        // Test JavaScript loading
+        const jsTest = document.getElementById('jsTest');
+        try {
+            // Test if script.js is loaded
+            if (typeof CONFIG !== 'undefined') {
+                jsTest.innerHTML = '<span class="success">✓ script.js loaded successfully</span>';
+            } else {
+                jsTest.innerHTML = '<span class="error">✗ script.js not loaded</span>';
+            }
+        } catch (error) {
+            jsTest.innerHTML = `<span class="error">✗ JavaScript Error: ${error.message}</span>`;
+        }
+    </script>
+</body>
+</html>

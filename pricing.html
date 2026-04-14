@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Plans - CertMed</title>
+    <meta name="description" content="Choose the right CertMed pricing plan for your pharmaceutical verification needs">
+    <meta name="keywords" content="pricing plans, subscription, medicine verification, pharmaceutical security">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Pricing Plans - CertMed">
+    <meta property="og:description" content="Choose the right CertMed pricing plan for your pharmaceutical verification needs">
+    <meta property="og:image" content="https://certmed.com/images/og-image.jpg">
+    <meta property="og:url" content="https://certmed.com/pricing">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-enhanced.css">
+    
+    <!-- Pricing Specific Styles -->
+    <style>
+        .pricing-hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 4rem 0;
+        }
+        
+        .pricing-section {
+            padding: 4rem 0;
+            background: #f8f9fa;
+        }
+        
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary-color);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+        
+        .plan-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .plan-price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        
+        .plan-description {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 2rem;
+        }
+        
+        .plan-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .plan-features i {
+            color: var(--success-color);
+            font-size: 0.9rem;
+        }
+        
+        .plan-action {
+            text-align: center;
+        }
+        
+        .plan-action .btn {
+            width: 100%;
+            padding: 1rem;
+        }
+        
+        .price-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .search-bar {
+            display: flex;
+            flex: 1;
+            gap: 0.5rem;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .filter-options select {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: white;
+        }
+        
+        .price-table-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .price-table th,
+        .price-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .price-table th {
+            background: var(--light-color);
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .price-table tbody tr:hover {
+            background: var(--light-color);
+        }
+        
+        .price-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-fair {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .status-high {
+            background: var(--warning-color);
+            color: white;
+        }
+        
+        .status-overpriced {
+            background: var(--danger-color);
+            color: white;
+        }
+        
+        .price-range {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .price-min,
+        .price-max {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .price-separator {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        
+        .price-recommended {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+        
+        .faq-section {
+            padding: 4rem 0;
+            background: white;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background: var(--light-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: #e9ecef;
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            background: white;
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-price {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Loading CertMed...</p>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <div class="brand-logo">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>CertMed</span>
+                    </div>
+                    <div class="brand-badge">BETA</div>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item dropdown">
+                        <a href="index.html" class="nav-link dropdown-toggle">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="verify.html" class="nav-link">
+                            <i class="fas fa-qrcode"></i> Verify
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="verify.html#qr-scanner" class="dropdown-item">
+                                <i class="fas fa-camera"></i> QR Scanner
+                            </a>
+                            <a href="verify.html#sms-verify" class="dropdown-item">
+                                <i class="fas fa-sms"></i> SMS Verify
+                            </a>
+                            <a href="verify.html#manual-verify" class="dropdown-item">
+                                <i class="fas fa-keyboard"></i> Manual Entry
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="catalog.html" class="nav-link dropdown-toggle">
+                            <i class="fas fa-pills"></i> Catalog
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="catalog.html#search" class="dropdown-item">
+                                <i class="fas fa-search"></i> Search Products
+                            </a>
+                            <a href="catalog.html#categories" class="dropdown-item">
+                                <i class="fas fa-th-large"></i> Categories
+                            </a>
+                            <a href="catalog.html#manufacturers" class="dropdown-item">
+                                <i class="fas fa-industry"></i> Manufacturers
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="dashboard.html" class="nav-link dropdown-toggle">
+                            <i class="fas fa-chart-line"></i> Dashboard
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="dashboard.html#analytics" class="dropdown-item">
+                                <i class="fas fa-chart-bar"></i> Analytics
+                            </a>
+                            <a href="dashboard.html#reports" class="dropdown-item">
+                                <i class="fas fa-file-alt"></i> Reports
+                            </a>
+                            <a href="dashboard.html#settings" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            <i class="fas fa-th-large"></i> Features
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="pricing.html" class="dropdown-item active">
+                                <i class="fas fa-dollar-sign"></i> Pricing
+                            </a>
+                            <a href="catalog.html" class="dropdown-item">
+                                <i class="fas fa-database"></i> Product Catalog
+                            </a>
+                            <a href="manufacturer.html" class="dropdown-item">
+                                <i class="fas fa-industry"></i> Manufacturer Portal
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">
+                            <i class="fas fa-info-circle"></i> About
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contact.html" class="nav-link">
+                            <i class="fas fa-envelope"></i> Contact
+                        </a>
+                    </li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-outline" onclick="window.location.href='index.html#login'">Login</button>
+                    <button class="btn btn-primary" onclick="window.location.href='index.html#signup'">Sign Up</button>
+                </div>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero pricing-hero" id="pricing-hero">
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Manufacturer Price Ranges</span>
+                    <br>Updated Daily
+                </h1>
+                <p class="hero-description">
+                    Official manufacturer-defined price ranges for authentic medicines. 
+                    Regularly updated to reflect current market conditions and prevent overpricing.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manufacturer Price Ranges Section -->
+    <section class="pricing-section" id="price-ranges">
+        <div class="container">
+            <div class="pricing-container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Official Manufacturer Price Ranges</h2>
+                    <p>Daily updated price ranges defined by manufacturers to ensure fair pricing</p>
+                </div>
+                
+                <!-- Search and Filter -->
+                <div class="price-controls" data-aos="fade-up" data-aos-delay="100">
+                    <div class="search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="priceSearch" placeholder="Search for medicines...">
+                        <button class="btn btn-primary" onclick="searchMedicines()">Search</button>
+                    </div>
+                    
+                    <div class="filter-options">
+                        <select id="categoryFilter" onchange="filterMedicines()">
+                            <option value="">All Categories</option>
+                            <option value="Pain Relief">Pain Relief</option>
+                            <option value="Antibiotics">Antibiotics</option>
+                            <option value="Cardiovascular">Cardiovascular</option>
+                            <option value="Diabetes">Diabetes</option>
+                        </select>
+                        
+                        <select id="sortBy" onchange="sortMedicines()">
+                            <option value="name">Sort by Name</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Price Range Table -->
+                <div class="price-table-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="price-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Medicine Name</th>
+                                    <th>Manufacturer</th>
+                                    <th>Dosage</th>
+                                    <th>Price Range</th>
+                                    <th>Last Updated</th>
+                                    <th>Status</th>
+                                    <th>Verify</th>
+                                </tr>
+                            </thead>
+                            <tbody id="priceTableBody">
+                                <!-- Products will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2>Ready to Get Started?</h2>
+                <p>Join thousands of pharmaceutical companies already protecting their products with CertMed</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary btn-lg" onclick="window.location.href='index.html#signup'">
+                        <i class="fas fa-rocket"></i> Start Free Trial
+                    </button>
+                    <button class="btn btn-outline btn-lg" onclick="window.location.href='contact.html'">
+                        <i class="fas fa-phone"></i> Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <div class="footer-logo">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>CertMed</span>
+                        </div>
+                        <p>Advanced medicine authentication and anti-counterfeit platform</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="verify.html">Verify</a></li>
+                            <li><a href="catalog.html">Catalog</a></li>
+                            <li><a href="dashboard.html">Dashboard</a></li>
+                            <li><a href="pricing.html">Pricing</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Features</h4>
+                        <ul>
+                            <li><a href="verify.html">QR Verification</a></li>
+                            <li><a href="verify.html">SMS Verification</a></li>
+                            <li><a href="dashboard.html">Analytics</a></li>
+                            <li><a href="manufacturer.html">Manufacturer Portal</a></li>
+                            <li><a href="pricing.html">Pricing Plans</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="#">Documentation</a></li>
+                            <li><a href="#">API</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 CertMed. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Page-specific functions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+            
+            // Fetch price ranges from backend
+            fetchPriceRanges();
+            
+            // Hide loading screen
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 300);
+                }
+            }, 1000);
+        });
+
+        // Price ranges will be fetched from backend API
+let manufacturerPriceRanges = [];
+        
+// API base URL
+const API_BASE_URL = 'http://localhost:3000/api';
+
+// Fetch price ranges from backend
+async function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 1000;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                max-width: 300px;
+                word-wrap: break-word;
+            `;
+            
+            // Set background color based on type
+            if (type === 'success') {
+                notification.style.background = '#10b981';
+            } else if (type === 'error') {
+                notification.style.background = '#ef4444';
+            } else if (type === 'warning') {
+                notification.style.background = '#f59e0b';
+            } else {
+                notification.style.background = '#0ea5e9';
+            }
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide and remove after delay
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        async function fetchPriceRanges() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/pricing`);
+                if (response.ok) {
+                    manufacturerPriceRanges = await response.json();
+                    console.log('Price ranges loaded from backend:', manufacturerPriceRanges.length);
+                    displayPriceTable();
+                } else {
+                    console.error('Failed to fetch price ranges from backend');
+                    showNotification('Failed to load pricing data. Please try again.', 'error');
+                }
+            } catch (error) {
+                console.error('Error fetching price ranges:', error);
+                showNotification('Network error. Please check your connection.', 'error');
+            }
+        }
+
+let filteredPrices = [...manufacturerPriceRanges];
+
+function searchMedicines() {
+    const searchTerm = document.getElementById('priceSearch').value.toLowerCase();
+    
+    if (!searchTerm) {
+        filteredPrices = [...manufacturerPriceRanges];
+    } else {
+        filteredPrices = manufacturerPriceRanges.filter(medicine => 
+            medicine.name.toLowerCase().includes(searchTerm) ||
+            medicine.manufacturer.toLowerCase().includes(searchTerm) ||
+            medicine.category.toLowerCase().includes(searchTerm)
+        );
+    }
+    
+    displayPriceTable();
+}
+
+function filterMedicines() {
+    const category = document.getElementById('categoryFilter').value;
+    
+    if (!category) {
+        filteredPrices = [...manufacturerPriceRanges];
+    } else {
+        filteredPrices = manufacturerPriceRanges.filter(medicine => medicine.category === category);
+    }
+    
+    displayPriceTable();
+}
+
+function sortMedicines() {
+    const sortBy = document.getElementById('sortBy').value;
+    
+    switch(sortBy) {
+        case 'name':
+            filteredPrices.sort((a, b) => a.name.localeCompare(b.name));
+            break;
+        case 'price-low':
+            filteredPrices.sort((a, b) => a.priceRange.recommended - b.priceRange.recommended);
+            break;
+        case 'price-high':
+            filteredPrices.sort((a, b) => b.priceRange.recommended - a.priceRange.recommended);
+            break;
+    }
+    
+    displayPriceTable();
+}
+
+function displayPriceTable() {
+    const tableBody = document.getElementById('priceTableBody');
+    
+    if (!tableBody) return;
+    
+    tableBody.innerHTML = filteredPrices.map(medicine => `
+        <tr>
+            <td>${medicine.name}</td>
+            <td>${medicine.manufacturer}</td>
+            <td>${medicine.dosage} ${medicine.form}</td>
+            <td>
+                <div class="price-range">
+                    <span class="price-min">KES ${medicine.priceRange.min.toLocaleString()}</span>
+                    <span class="price-separator">-</span>
+                    <span class="price-max">KES ${medicine.priceRange.max.toLocaleString()}</span>
+                    <div class="price-recommended">Rec: KES ${medicine.priceRange.recommended.toLocaleString()}</div>
+                </div>
+            </td>
+            <td>${medicine.lastUpdated}</td>
+            <td>
+                <span class="price-status status-${medicine.status}">
+                    ${medicine.status.toUpperCase()}
+                </span>
+            </td>
+            <td>
+                <button class="btn btn-sm btn-primary" onclick="verifyMedicine('${medicine.id}')">
+                    <i class="fas fa-qrcode"></i> Verify
+                </button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function verifyMedicine(medicineId) {
+    showToast('Redirecting to verification...', 'info');
+    setTimeout(() => {
+        window.location.href = `verify.html?product=${medicineId}`;
+    }, 1000);
+}
+
+        
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            
+            // Add to body
+            document.body.appendChild(toast);
+            
+            // Show toast
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            // Hide and remove after delay
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.parentNode.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Mobile menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Dropdown menus
+        const dropdowns = document.querySelectorAll('.dropdown');
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            const menu = dropdown.querySelector('.dropdown-menu');
+            
+            if (toggle && menu) {
+                toggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                });
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!dropdown.contains(e.target)) {
+                        menu.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Toast Styles -->
+    <style>
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark-color);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            max-width: 300px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.success {
+            background: var(--success-color);
+        }
+
+        .toast.error {
+            background: var(--danger-color);
+        }
+
+        .toast.info {
+            background: var(--primary-color);
+        }
+
+        .toast.warning {
+            background: var(--warning-color);
+        }
+    </style>
+</body>
+</html>

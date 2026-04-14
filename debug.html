@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - CertMed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <h1>CertMed Debug Page</h1>
+    
+    <div class="debug-info">
+        <h2>File Status Check</h2>
+        <div id="fileStatus">Checking files...</div>
+        
+        <h2>JavaScript Check</h2>
+        <div id="jsStatus">Checking JavaScript...</div>
+        
+        <h2>CSS Check</h2>
+        <div id="cssStatus">Checking CSS...</div>
+        
+        <h2>QR Scanner Check</h2>
+        <div id="qrStatus">Checking QR Scanner...</div>
+    </div>
+
+    <script>
+        // Check if files exist
+        async function checkFiles() {
+            const files = ['styles.css', 'styles-enhanced.css', 'script.js'];
+            const fileStatusDiv = document.getElementById('fileStatus');
+            
+            for (const file of files) {
+                try {
+                    const response = await fetch(file);
+                    const status = response.ok ? 'success' : 'error';
+                    fileStatusDiv.innerHTML += `<div class="status ${status}">${file}: ${status}</div>`;
+                } catch (error) {
+                    fileStatusDiv.innerHTML += `<div class="status error">${file}: ERROR</div>`;
+                }
+            }
+        }
+        
+        // Check JavaScript
+        function checkJS() {
+            const jsStatusDiv = document.getElementById('jsStatus');
+            try {
+                // Test basic JavaScript
+                const test = 'JavaScript working';
+                jsStatusDiv.innerHTML = `<div class="status success">JavaScript: ${test}</div>`;
+            } catch (error) {
+                jsStatusDiv.innerHTML = `<div class="status error">JavaScript: ERROR - ${error.message}</div>`;
+            }
+        }
+        
+        // Check CSS
+        function checkCSS() {
+            const cssStatusDiv = document.getElementById('cssStatus');
+            try {
+                // Test if CSS is loaded
+                const testElement = document.createElement('div');
+                testElement.style.display = 'none';
+                cssStatusDiv.innerHTML = `<div class="status success">CSS: Working</div>`;
+            } catch (error) {
+                cssStatusDiv.innerHTML = `<div class="status error">CSS: ERROR - ${error.message}</div>`;
+            }
+        }
+        
+        // Check QR Scanner
+        function checkQRScanner() {
+            const qrStatusDiv = document.getElementById('qrStatus');
+            try {
+                // Check if QrScanner is available
+                if (typeof QrScanner !== 'undefined') {
+                    qrStatusDiv.innerHTML = `<div class="status success">QR Scanner: Available</div>`;
+                } else {
+                    qrStatusDiv.innerHTML = `<div class="status error">QR Scanner: NOT Available</div>`;
+                }
+            } catch (error) {
+                qrStatusDiv.innerHTML = `<div class="status error">QR Scanner: ERROR - ${error.message}</div>`;
+            }
+        }
+        
+        // Run all checks
+        checkFiles();
+        checkJS();
+        checkCSS();
+        checkQRScanner();
+    </script>
+</body>
+</html>

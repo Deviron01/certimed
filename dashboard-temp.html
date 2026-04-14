@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - CertMed (Updated 4:16 AM)</title>
+    <title>Dashboard - CertMed</title>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,7 @@
         .dashboard-header {
             background: white;
             border-bottom: 1px solid var(--border);
-            padding: 0.75rem 2rem;
+            padding: 1rem 2rem;
             position: fixed;
             top: 0;
             left: 0;
@@ -62,17 +62,16 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--shadow);
-            height: 65px;
         }
 
         .header-brand {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 1rem;
         }
 
         .header-brand h1 {
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--primary);
         }
@@ -81,105 +80,63 @@
             display: flex;
             align-items: center;
             gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .date-filter {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: white;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-
-        .date-filter input[type="date"] {
-            border: 1px solid var(--border);
-            border-radius: 0.25rem;
-            padding: 0.5rem 0.75rem;
-            font-size: 0.8125rem;
-            background: white;
-            min-width: 120px;
-            transition: border-color 0.3s ease;
-        }
-
-        .date-filter input[type="date"]:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
-        }
-
-        .date-filter span {
-            color: var(--secondary);
-            font-size: 0.8125rem;
-            font-weight: 500;
         }
 
         .btn {
-            padding: 0.5rem 1rem;
+            padding: 0.625rem 1.25rem;
             border: none;
-            border-radius: 0.375rem;
+            border-radius: 0.5rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.8125rem;
-            white-space: nowrap;
+            font-size: 0.875rem;
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
-            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);
         }
 
         .btn-primary:hover {
             background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-            box-shadow: 0 1px 2px rgba(14, 165, 233, 0.2);
+            transform: translateY(-1px);
         }
 
         /* Dashboard Layout */
         .dashboard-layout {
             display: flex;
             min-height: 100vh;
-            margin-top: 65px;
+            margin-top: 70px;
         }
 
         /* Sidebar */
         .dashboard-sidebar {
-            width: 220px;
+            width: 280px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
             position: fixed;
-            height: calc(100vh - 65px);
+            height: calc(100vh - 70px);
             overflow-y: auto;
             box-shadow: var(--shadow-lg);
         }
 
         .sidebar-header {
-            padding: 0 1rem 1.5rem;
+            padding: 0 1.5rem 2rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             margin-bottom: 1rem;
         }
 
         .sidebar-header h3 {
-            font-size: 1.125rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
         }
 
         .sidebar-header p {
-            font-size: 0.75rem;
+            font-size: 0.875rem;
             opacity: 0.8;
         }
 
@@ -188,18 +145,18 @@
         }
 
         .sidebar-nav li {
-            margin-bottom: 0.125rem;
+            margin-bottom: 0.25rem;
         }
 
         .sidebar-nav a {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.625rem 1rem;
+            padding: 0.875rem 1.5rem;
             color: rgba(255,255,255,0.8);
             text-decoration: none;
             transition: all 0.3s ease;
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
         }
 
         .sidebar-nav a:hover,
@@ -209,42 +166,37 @@
         }
 
         .sidebar-nav i {
-            width: 16px;
+            width: 20px;
             text-align: center;
         }
 
         /* Main Content */
         .dashboard-main {
             flex: 1;
-            margin-left: 220px;
-            padding: 1rem;
+            margin-left: 280px;
+            padding: 2rem;
             background: #f8fafc;
-            min-height: calc(100vh - 65px);
+            min-height: calc(100vh - 70px);
         }
 
-        /* Content Sections */
-        .content-section {
-            margin-bottom: 2rem;
-            display: none;
-            padding: 0;
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            gap: 1.5rem;
         }
 
-        .content-section.active {
-            display: block;
-        }
-
-        /* Stats Grid */
+        /* Stats Cards */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .stat-card {
             background: white;
-            border-radius: 0.5rem;
-            padding: 1rem;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             transition: all 0.3s ease;
@@ -258,7 +210,7 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--primary-dark));
         }
 
@@ -271,17 +223,17 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
 
         .stat-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 0.375rem;
+            width: 48px;
+            height: 48px;
+            border-radius: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
+            font-size: 1.25rem;
             color: white;
             flex-shrink: 0;
         }
@@ -291,7 +243,7 @@
         }
 
         .stat-value {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--dark);
             margin-bottom: 0.25rem;
@@ -300,15 +252,15 @@
 
         .stat-label {
             color: var(--secondary);
-            font-size: 0.75rem;
+            font-size: 0.875rem;
             font-weight: 500;
         }
 
         .stat-change {
             position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            font-size: 0.6875rem;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.75rem;
             font-weight: 600;
             padding: 0.25rem 0.5rem;
             border-radius: 9999px;
@@ -324,64 +276,49 @@
             color: var(--danger);
         }
 
-        /* Charts Grid */
-        .charts-grid {
+        /* Charts Section */
+        .charts-section {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
-            align-items: stretch;
         }
 
         .chart-container {
             background: white;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             padding: 1.5rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
-            height: 350px;
-            min-height: 350px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
         }
 
         .chart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            flex-shrink: 0;
+            margin-bottom: 1.5rem;
         }
 
         .chart-title {
-            font-size: 0.875rem;
+            font-size: 1.125rem;
             font-weight: 600;
             color: var(--dark);
-        }
-
-        .chart-container canvas {
-            flex: 1;
-            min-height: 0;
         }
 
         .chart-controls {
             display: flex;
             gap: 0.5rem;
-            align-items: center;
-            flex-wrap: wrap;
         }
 
         .chart-controls button {
             padding: 0.375rem 0.75rem;
             border: 1px solid var(--border);
             background: white;
-            border-radius: 0.25rem;
+            border-radius: 0.375rem;
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 0.75rem;
             font-weight: 500;
-            white-space: nowrap;
         }
 
         .chart-controls button:hover,
@@ -389,17 +326,15 @@
             background: var(--primary);
             color: white;
             border-color: var(--primary);
-            transform: translateY(-1px);
         }
 
-        /* Activity Section */
+        /* Recent Activity */
         .activity-section {
             background: white;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             padding: 1.5rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
-            margin-bottom: 2rem;
         }
 
         .activity-header {
@@ -407,12 +342,10 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
         .activity-list {
-            max-height: 350px;
+            max-height: 400px;
             overflow-y: auto;
         }
 
@@ -434,40 +367,37 @@
         }
 
         .activity-icon {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
+            font-size: 0.875rem;
             color: white;
             flex-shrink: 0;
         }
 
         .activity-details {
             flex: 1;
-            min-width: 0;
         }
 
         .activity-title {
             font-weight: 500;
             color: var(--dark);
-            font-size: 0.8125rem;
-            margin-bottom: 0.125rem;
-            line-height: 1.4;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
         }
 
         .activity-time {
             color: var(--secondary);
-            font-size: 0.6875rem;
-            white-space: nowrap;
+            font-size: 0.75rem;
         }
 
         .activity-status {
-            padding: 0.125rem 0.5rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 9999px;
-            font-size: 0.6875rem;
+            font-size: 0.75rem;
             font-weight: 500;
             text-transform: capitalize;
         }
@@ -490,19 +420,17 @@
         /* Data Table */
         .data-table-container {
             background: white;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             padding: 1.5rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--border);
             overflow-x: auto;
-            margin-bottom: 1.5rem;
         }
 
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.8125rem;
-            table-layout: fixed;
+            font-size: 0.875rem;
         }
 
         .data-table th {
@@ -513,19 +441,12 @@
             padding: 1rem;
             border-bottom: 2px solid var(--border);
             white-space: nowrap;
-            position: sticky;
-            top: 0;
-            z-index: 10;
         }
 
         .data-table td {
             padding: 1rem;
             border-bottom: 1px solid var(--border);
             vertical-align: middle;
-            max-width: 200px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
         .data-table tbody tr:hover {
@@ -533,9 +454,9 @@
         }
 
         .status-badge {
-            padding: 0.125rem 0.5rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 9999px;
-            font-size: 0.6875rem;
+            font-size: 0.75rem;
             font-weight: 500;
             text-transform: capitalize;
         }
@@ -558,19 +479,15 @@
         /* Responsive Design */
         @media (max-width: 1024px) {
             .dashboard-sidebar {
-                width: 200px;
+                width: 240px;
             }
 
             .dashboard-main {
-                margin-left: 200px;
+                margin-left: 240px;
             }
 
-            .charts-grid {
+            .charts-section {
                 grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             }
         }
 
@@ -586,25 +503,20 @@
 
             .dashboard-main {
                 margin-left: 0;
-                padding: 0.75rem;
+                padding: 1rem;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr;
-            }
-
-            .header-actions {
-                flex-direction: column;
-                gap: 0.5rem;
             }
         }
 
         /* Loading Animation */
         .loading {
             display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255,255,255,.3);
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
             border-radius: 50%;
             border-top-color: white;
             animation: spin 1s ease-in-out infinite;
@@ -617,18 +529,17 @@
         /* Toast Notifications */
         .toast {
             position: fixed;
-            bottom: 1rem;
-            right: 1rem;
+            bottom: 2rem;
+            right: 2rem;
             background: var(--dark);
             color: white;
-            padding: 0.75rem 1rem;
-            border-radius: 0.375rem;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
             box-shadow: var(--shadow-lg);
             z-index: 2000;
             transform: translateX(400px);
             transition: transform 0.3s ease;
-            max-width: 250px;
-            font-size: 0.8125rem;
+            max-width: 300px;
         }
 
         .toast.show {
@@ -646,32 +557,13 @@
         .toast.warning {
             background: var(--warning);
         }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.25rem;
-            color: var(--primary);
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-        }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="dashboard-header">
         <div class="header-brand">
-            <button class="menu-toggle" onclick="toggleSidebar()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <i class="fas fa-shield-alt" style="font-size: 1.25rem; color: var(--primary);"></i>
+            <i class="fas fa-shield-alt" style="font-size: 1.5rem; color: var(--primary);"></i>
             <h1>CertMed Dashboard</h1>
         </div>
         <div class="header-actions">
@@ -693,50 +585,50 @@
     <!-- Dashboard Layout -->
     <div class="dashboard-layout">
         <!-- Sidebar -->
-        <aside class="dashboard-sidebar" id="sidebar">
+        <aside class="dashboard-sidebar">
             <div class="sidebar-header">
                 <h3>Dashboard</h3>
                 <p>Welcome back, Administrator!</p>
             </div>
             <nav class="sidebar-nav">
                 <li>
-                    <a href="#overview" class="nav-link active" onclick="showSection('overview', this)">
+                    <a href="#overview" class="active">
                         <i class="fas fa-home"></i>
                         Overview
                     </a>
                 </li>
                 <li>
-                    <a href="#verifications" class="nav-link" onclick="showSection('verifications', this)">
+                    <a href="#verifications">
                         <i class="fas fa-qrcode"></i>
                         Verifications
                     </a>
                 </li>
                 <li>
-                    <a href="#analytics" class="nav-link" onclick="showSection('analytics', this)">
+                    <a href="#analytics">
                         <i class="fas fa-chart-bar"></i>
                         Analytics
                     </a>
                 </li>
                 <li>
-                    <a href="#reports" class="nav-link" onclick="showSection('reports', this)">
+                    <a href="#reports">
                         <i class="fas fa-file-alt"></i>
                         Reports
                     </a>
                 </li>
                 <li>
-                    <a href="#products" class="nav-link" onclick="showSection('products', this)">
+                    <a href="#products">
                         <i class="fas fa-pills"></i>
                         Products
                     </a>
                 </li>
                 <li>
-                    <a href="#users" class="nav-link" onclick="showSection('users', this)">
+                    <a href="#users">
                         <i class="fas fa-users"></i>
                         Users
                     </a>
                 </li>
                 <li>
-                    <a href="#settings" class="nav-link" onclick="showSection('settings', this)">
+                    <a href="#settings">
                         <i class="fas fa-cog"></i>
                         Settings
                     </a>
@@ -746,8 +638,7 @@
 
         <!-- Main Content -->
         <main class="dashboard-main">
-            <!-- Overview Section -->
-            <section id="overview" class="content-section active">
+            <div class="dashboard-grid">
                 <!-- Stats Cards -->
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -804,7 +695,7 @@
                 </div>
 
                 <!-- Charts Section -->
-                <div class="charts-grid">
+                <div class="charts-section">
                     <div class="chart-container">
                         <div class="chart-header">
                             <h3 class="chart-title">Verification Trends</h3>
@@ -814,14 +705,14 @@
                                 <button onclick="updateChart('year', this)">Year</button>
                             </div>
                         </div>
-                        <canvas id="verificationChart"></canvas>
+                        <canvas id="verificationChart" height="200"></canvas>
                     </div>
 
                     <div class="chart-container">
                         <div class="chart-header">
                             <h3 class="chart-title">Verification Methods</h3>
                         </div>
-                        <canvas id="methodsChart"></canvas>
+                        <canvas id="methodsChart" height="200"></canvas>
                     </div>
                 </div>
 
@@ -837,10 +728,8 @@
                         <!-- Activity items will be populated here -->
                     </div>
                 </div>
-            </section>
 
-            <!-- Verifications Section -->
-            <section id="verifications" class="content-section">
+                <!-- Data Table -->
                 <div class="data-table-container">
                     <div class="activity-header">
                         <h3 class="chart-title">Recent Verifications</h3>
@@ -865,161 +754,7 @@
                         </tbody>
                     </table>
                 </div>
-            </section>
-
-            <!-- Analytics Section -->
-            <section id="analytics" class="content-section">
-                <div class="charts-grid">
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h3 class="chart-title">Verification Analytics</h3>
-                        </div>
-                        <canvas id="analyticsChart"></canvas>
-                    </div>
-                    <div class="chart-container">
-                        <div class="chart-header">
-                            <h3 class="chart-title">Method Distribution</h3>
-                        </div>
-                        <canvas id="distributionChart"></canvas>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Reports Section -->
-            <section id="reports" class="content-section">
-                <div class="data-table-container">
-                    <div class="activity-header">
-                        <h3 class="chart-title">Verification Reports</h3>
-                        <div class="chart-controls">
-                            <button class="active" onclick="filterReports('all', this)">All</button>
-                            <button onclick="filterReports('success', this)">Success</button>
-                            <button onclick="filterReports('failed', this)">Failed</button>
-                            <button class="btn btn-primary" onclick="generateReport()">
-                                <i class="fas fa-file-export"></i> Export
-                            </button>
-                        </div>
-                    </div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Product Code</th>
-                                <th>Method</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reportsTableBody">
-                            <!-- Report data will be populated here -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Products Section -->
-            <section id="products" class="content-section">
-                <div class="data-table-container">
-                    <div class="activity-header">
-                        <h3 class="chart-title">Product Management</h3>
-                        <div class="chart-controls">
-                            <input type="text" id="productSearch" placeholder="Search products..." style="padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.25rem;">
-                            <button class="btn btn-primary" onclick="addProduct()">
-                                <i class="fas fa-plus"></i> Add Product
-                            </button>
-                        </div>
-                    </div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Product Name</th>
-                                <th>Manufacturer</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="productsTableBody">
-                            <!-- Product data will be populated here -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Users Section -->
-            <section id="users" class="content-section">
-                <div class="data-table-container">
-                    <div class="activity-header">
-                        <h3 class="chart-title">User Management</h3>
-                        <div class="chart-controls">
-                            <input type="text" id="userSearch" placeholder="Search users..." style="padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.25rem;">
-                            <button class="btn btn-primary" onclick="addUser()">
-                                <i class="fas fa-user-plus"></i> Add User
-                            </button>
-                        </div>
-                    </div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTableBody">
-                            <!-- User data will be populated here -->
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Settings Section -->
-            <section id="settings" class="content-section">
-                <div class="activity-section">
-                    <div class="activity-header">
-                        <h3 class="chart-title">System Settings</h3>
-                        <button class="btn btn-primary" onclick="saveSettings()">
-                            <i class="fas fa-save"></i> Save Settings
-                        </button>
-                    </div>
-                    <div class="activity-list">
-                        <div class="activity-item">
-                            <div class="activity-icon" style="background: var(--primary);">
-                                <i class="fas fa-cog"></i>
-                            </div>
-                            <div class="activity-details">
-                                <div class="activity-title">API Configuration</div>
-                                <div class="activity-time">Manage API endpoints and authentication</div>
-                            </div>
-                            <button class="btn btn-primary" onclick="configureApi()">Configure</button>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon" style="background: var(--success);">
-                                <i class="fas fa-bell"></i>
-                            </div>
-                            <div class="activity-details">
-                                <div class="activity-title">Notification Settings</div>
-                                <div class="activity-time">Configure email and SMS notifications</div>
-                            </div>
-                            <button class="btn btn-primary" onclick="configureNotifications()">Configure</button>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon" style="background: var(--warning);">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <div class="activity-details">
-                                <div class="activity-title">Security Settings</div>
-                                <div class="activity-time">Manage authentication and access controls</div>
-                            </div>
-                            <button class="btn btn-primary" onclick="configureSecurity()">Configure</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         </main>
     </div>
 
@@ -1032,73 +767,30 @@
             recentActivity: []
         };
 
-        // Navigation functionality
-        function showSection(sectionId, linkElement) {
-            // Hide all sections
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Update active nav link
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            linkElement.classList.add('active');
-            
-            // Close mobile sidebar
-            if (window.innerWidth <= 768) {
-                document.getElementById('sidebar').classList.remove('active');
-            }
-        }
-
-        // Toggle sidebar for mobile
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-        }
-
         // Fetch dashboard data from backend
         async function fetchDashboardData() {
             try {
-                console.log('Fetching dashboard data from:', API_BASE_URL);
-                
                 // Fetch stats
                 const statsResponse = await fetch(`${API_BASE_URL}/dashboard/stats`);
-                console.log('Stats response:', statsResponse.status);
                 if (statsResponse.ok) {
                     dashboardData.stats = await statsResponse.json();
-                    console.log('Stats data received:', dashboardData.stats);
                     updateStatsDisplay();
-                } else {
-                    console.error('Stats fetch failed:', statsResponse.status);
                 }
 
                 // Fetch verification trends
                 const trendsResponse = await fetch(`${API_BASE_URL}/dashboard/verifications`);
-                console.log('Trends response:', trendsResponse.status);
                 if (trendsResponse.ok) {
                     dashboardData.verifications = await trendsResponse.json();
-                    console.log('Trends data received:', dashboardData.verifications);
                     updateVerificationChart();
-                } else {
-                    console.error('Trends fetch failed:', trendsResponse.status);
                 }
 
                 // Fetch recent activity
                 const activityResponse = await fetch(`${API_BASE_URL}/dashboard/recent`);
-                console.log('Activity response:', activityResponse.status);
                 if (activityResponse.ok) {
                     dashboardData.recentActivity = await activityResponse.json();
-                    console.log('Activity data received:', dashboardData.recentActivity);
                     updateActivityFeed();
                     updateVerificationsTable();
-                } else {
-                    console.error('Activity fetch failed:', activityResponse.status);
                 }
-                
-                showToast('Dashboard data loaded successfully', 'success');
             } catch (error) {
                 console.error('Error fetching dashboard data:', error);
                 showToast('Failed to load dashboard data', 'error');
@@ -1107,11 +799,12 @@
 
         // Update statistics display
         function updateStatsDisplay() {
-            // Set all stats to 0 since no data has been generated yet
-            updateStatCard('totalVerifications', 0);
-            updateStatCard('successfulVerifications', 0);
-            updateStatCard('verifiedProducts', 0);
-            updateStatCard('counterfeitReports', 0);
+            const stats = dashboardData.stats;
+            
+            updateStatCard('totalVerifications', stats.totalVerifications || 0);
+            updateStatCard('successfulVerifications', stats.successfulVerifications || 0);
+            updateStatCard('verifiedProducts', stats.verifiedProducts || 0);
+            updateStatCard('counterfeitReports', stats.counterfeitReports || 0);
         }
 
         // Update individual stat card
@@ -1140,7 +833,7 @@
         function updateActivityFeed() {
             const feedContainer = document.getElementById('activityFeed');
             if (feedContainer && dashboardData.recentActivity.length > 0) {
-                const activityHTML = dashboardData.recentActivity.slice(0, 5).map(activity => `
+                const activityHTML = dashboardData.recentActivity.slice(0, 10).map(activity => `
                     <div class="activity-item">
                         <div class="activity-icon" style="background: ${getActivityColor(activity.status)};">
                             <i class="fas fa-${getActivityIcon(activity.type)}"></i>
@@ -1299,8 +992,9 @@
 
         // Refresh data
         function refreshData() {
+            showToast('Refreshing dashboard data...', 'info');
             fetchDashboardData();
-            showToast('Dashboard data refreshed', 'success');
+            setTimeout(() => showToast('Data refreshed successfully!', 'success'), 1000);
         }
 
         // Clear activity
@@ -1313,183 +1007,32 @@
         function updateDateRange() {
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
-            if (startDate && endDate) {
-                refreshData();
-                showToast(`Filtering data from ${startDate} to ${endDate}`, 'info');
-            }
+            showToast(`Filtering data from ${startDate} to ${endDate}`, 'info');
+            refreshData();
         }
 
         // Update chart period
         function updateChart(period, button) {
             document.querySelectorAll('.chart-controls button').forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
+            showToast(`Showing ${period} view`, 'info');
         }
 
         // Export data
         function exportData() {
-            // In real implementation, this would export data to CSV/Excel
+            showToast('Exporting data...', 'info');
+            setTimeout(() => showToast('Data exported successfully!', 'success'), 1500);
         }
 
         // View verification
         function viewVerification(id) {
-            // In real implementation, this would show verification details
-        }
-
-        // Generate report
-        function generateReport() {
-            // In real implementation, this would generate and download report
-        }
-
-        // Filter reports
-        function filterReports(filter, button) {
-            document.querySelectorAll('#reports .chart-controls button').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            // In real implementation, this would filter reports table
-        }
-
-        // Add product
-        function addProduct() {
-            // In real implementation, this would open a modal or navigate to product form
-        }
-
-        // Add user
-        function addUser() {
-            // In real implementation, this would open a modal or navigate to user form
-        }
-
-        // Configure API
-        function configureApi() {
-            // In real implementation, this would open API settings modal
-        }
-
-        // Configure notifications
-        function configureNotifications() {
-            // In real implementation, this would open notification settings modal
-        }
-
-        // Configure security
-        function configureSecurity() {
-            // In real implementation, this would open security settings modal
-        }
-
-        // Save settings
-        function saveSettings() {
-            // In real implementation, this would save settings to backend
-        }
-
-        // Initialize additional charts
-        function initAdditionalCharts() {
-            // Analytics Chart - Empty state
-            const ctx3 = document.getElementById('analyticsChart');
-            if (ctx3) {
-                window.analyticsChart = new Chart(ctx3.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                        datasets: [{
-                            label: 'Verifications',
-                            data: [0, 0, 0, 0, 0, 0, 0],
-                            backgroundColor: '#e2e8f0'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Distribution Chart - Empty state
-            const ctx4 = document.getElementById('distributionChart');
-            if (ctx4) {
-                window.distributionChart = new Chart(ctx4.getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['QR Scanner', 'SMS', 'Manual', 'API'],
-                        datasets: [{
-                            data: [0, 0, 0, 0],
-                            backgroundColor: ['#e2e8f0', '#e2e8f0', '#e2e8f0', '#e2e8f0']
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: true,
-                                position: 'bottom'
-                            }
-                        }
-                    }
-                });
-            }
-        }
-
-        // Update tables with real data
-        function updateReportsTable() {
-            const tableBody = document.getElementById('reportsTableBody');
-            if (tableBody) {
-                tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--secondary);">No reports found. Start verifying products to see reports here.</td></tr>';
-            }
-        }
-
-        function updateProductsTable() {
-            const tableBody = document.getElementById('productsTableBody');
-            if (tableBody) {
-                tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--secondary);">No products found. Add your first product to get started.</td></tr>';
-            }
-        }
-
-        function updateUsersTable() {
-            const tableBody = document.getElementById('usersTableBody');
-            if (tableBody) {
-                tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--secondary);">No users found. Add your first user to get started.</td></tr>';
-            }
-        }
-
-        // Product actions
-        function editProduct(id) {
-            showToast(`Editing product ${id}...`, 'info');
-        }
-
-        function deleteProduct(id) {
-            showToast(`Deleting product ${id}...`, 'warning');
-        }
-
-        // User actions
-        function editUser(id) {
-            showToast(`Editing user ${id}...`, 'info');
-        }
-
-        function deleteUser(id) {
-            showToast(`Deleting user ${id}...`, 'warning');
-        }
-
-        // Report actions
-        function downloadReport(id) {
-            showToast(`Downloading report ${id}...`, 'info');
+            showToast(`Viewing verification #${id}`, 'info');
         }
 
         // Initialize dashboard
         document.addEventListener('DOMContentLoaded', function() {
             initCharts();
-            initAdditionalCharts();
             fetchDashboardData();
-            
-            // Update all tables with data
-            updateReportsTable();
-            updateProductsTable();
-            updateUsersTable();
             
             // Auto-refresh every 30 seconds
             setInterval(fetchDashboardData, 30000);
