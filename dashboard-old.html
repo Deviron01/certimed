@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - CertMed</title>
+<<<<<<< HEAD
+=======
+    <meta name="description" content="CertMed dashboard with analytics, reports, and verification statistics">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +24,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles-enhanced.css">
     
+<<<<<<< HEAD
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -41,6 +46,22 @@
             --text-muted: var(--secondary-500);
             --shadow: var(--box-shadow);
             --shadow-lg: var(--box-shadow-lg);
+=======
+    <!-- Dashboard Specific Styles -->
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-color: #1f2937;
+            --light-color: #f9fafb;
+            --border-color: #e5e7eb;
+            --text-muted: #6b7280;
+            --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         * {
@@ -50,9 +71,15 @@
         }
 
         body {
+<<<<<<< HEAD
             font-family: var(--font-family-primary);
             background: var(--light-color);
             color: var(--text-color);
+=======
+            font-family: 'Inter', sans-serif;
+            background: var(--light-color);
+            color: var(--dark-color);
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             line-height: 1.6;
         }
 
@@ -72,6 +99,7 @@
             box-shadow: var(--shadow);
         }
 
+<<<<<<< HEAD
         @media (min-width: 1200px) {
             .dashboard-header {
                 padding: 1rem 3rem;
@@ -84,6 +112,8 @@
             }
         }
 
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         .header-brand {
             display: flex;
             align-items: center;
@@ -162,6 +192,7 @@
             grid-template-columns: 250px 1fr;
             min-height: 100vh;
             margin-top: 70px;
+<<<<<<< HEAD
             width: 100%;
             overflow-x: hidden;
         }
@@ -176,11 +207,17 @@
             .dashboard-container {
                 grid-template-columns: 300px 1fr;
             }
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         /* Sidebar */
         .dashboard-sidebar {
+<<<<<<< HEAD
             background: linear-gradient(135deg, var(--primary-600) 0%, var(--primary-500) 100%);
+=======
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             color: white;
             padding: 2rem 1rem;
             position: fixed;
@@ -270,6 +307,7 @@
         /* Quick Actions */
         .quick-actions {
             display: grid;
+<<<<<<< HEAD
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
@@ -288,21 +326,34 @@
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                 gap: 2.5rem;
             }
+=======
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         .quick-action-card {
             background: white;
+<<<<<<< HEAD
             border-radius: 12px;
             padding: 1.5rem;
+=======
+            padding: 1.5rem;
+            border-radius: 12px;
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             box-shadow: var(--shadow);
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
+<<<<<<< HEAD
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1rem;
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         .quick-action-card:hover {
@@ -337,6 +388,7 @@
         /* Stats Grid */
         .stats-grid {
             display: grid;
+<<<<<<< HEAD
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-bottom: 2rem;
@@ -362,6 +414,22 @@
                 grid-template-columns: repeat(4, 1fr);
                 gap: 2.5rem;
             }
+=======
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         .stat-card:hover {
@@ -369,6 +437,19 @@
             box-shadow: var(--shadow-lg);
         }
 
+<<<<<<< HEAD
+=======
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         .stat-icon {
             width: 60px;
             height: 60px;
@@ -377,8 +458,13 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+<<<<<<< HEAD
             color: white;
             flex-shrink: 0;
+=======
+            margin-bottom: 1rem;
+            color: white;
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         .stat-value {
@@ -421,6 +507,7 @@
             box-shadow: var(--shadow);
             margin-bottom: 2rem;
             border: 1px solid var(--border-color);
+<<<<<<< HEAD
             width: 100%;
         }
 
@@ -434,6 +521,8 @@
             .chart-container {
                 padding: 3rem;
             }
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         .chart-header {
@@ -476,11 +565,16 @@
         /* Data Table */
         .data-table {
             background: white;
+<<<<<<< HEAD
             padding: 1.5rem;
+=======
+            padding: 2rem;
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             border-radius: 12px;
             box-shadow: var(--shadow);
             overflow-x: auto;
             border: 1px solid var(--border-color);
+<<<<<<< HEAD
             min-width: 0;
             width: 100%;
         }
@@ -495,10 +589,13 @@
             .data-table {
                 padding: 2.5rem;
             }
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         .data-table table {
             width: 100%;
+<<<<<<< HEAD
             min-width: 800px;
             border-collapse: collapse;
             font-size: 0.95rem;
@@ -516,10 +613,14 @@
                 min-width: 1200px;
                 font-size: 1.05rem;
             }
+=======
+            border-collapse: collapse;
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         .data-table th,
         .data-table td {
+<<<<<<< HEAD
             padding: 1rem;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
@@ -559,6 +660,11 @@
             .data-table td:nth-child(3) {
                 max-width: 300px;
             }
+=======
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         }
 
         .data-table th {
@@ -566,11 +672,17 @@
             font-weight: 600;
             color: var(--dark-color);
             font-size: 0.9rem;
+<<<<<<< HEAD
             position: sticky;
             top: 0;
         }
 
         .data-table tbody tr:hover {
+=======
+        }
+
+        .data-table tr:hover {
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             background: var(--light-color);
         }
 
@@ -765,6 +877,7 @@
         }
 
         /* Responsive Design */
+<<<<<<< HEAD
         @media (max-width: 1200px) {
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -775,6 +888,8 @@
             }
         }
 
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         @media (max-width: 768px) {
             .dashboard-container {
                 grid-template-columns: 1fr;
@@ -785,8 +900,11 @@
                 left: -250px;
                 transition: left 0.3s ease;
                 z-index: 999;
+<<<<<<< HEAD
                 height: 100vh;
                 top: 70px;
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             }
             
             .dashboard-sidebar.active {
@@ -796,7 +914,10 @@
             .dashboard-content {
                 margin-left: 0;
                 padding: 1rem;
+<<<<<<< HEAD
                 min-height: calc(100vh - 70px);
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             }
             
             .dashboard-header {
@@ -806,21 +927,31 @@
             .dashboard-header-content {
                 flex-direction: column;
                 align-items: flex-start;
+<<<<<<< HEAD
                 gap: 1rem;
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             }
             
             .stats-grid {
                 grid-template-columns: 1fr;
+<<<<<<< HEAD
                 gap: 1rem;
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             }
             
             .quick-actions {
                 grid-template-columns: 1fr;
+<<<<<<< HEAD
                 gap: 1rem;
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             }
             
             .chart-controls {
                 flex-wrap: wrap;
+<<<<<<< HEAD
                 gap: 0.5rem;
             }
             
@@ -859,11 +990,300 @@
             
             .chart-container {
                 padding: 1rem;
+=======
+            }
+        }
+    </style>
+        
+        /* Enhanced Dashboard Styles */
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .dashboard-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .dashboard-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .date-filter {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .date-filter input {
+            border: 1px solid #ddd;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .export-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .export-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+        
+        .notification-badge {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .quick-action-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .quick-action-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .data-table {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+        
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .settings-modal {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .settings-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .settings-group h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #ccc;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: #28a745;
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-switch.active::after {
+            transform: translateX(26px);
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+            
+            .dashboard-content {
+                padding: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .dashboard-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             }
         }
     </style>
 </head>
 <body>
+<<<<<<< HEAD
     <!-- Main Header -->
     <header class="header">
         <nav class="navbar">
@@ -942,6 +1362,68 @@
                 </div>
             </div>
         </nav>
+=======
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>CertMed</span>
+                </div>
+                <div class="brand-badge">BETA</div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item dropdown">
+                    <a href="index.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="verify.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-qrcode"></i> Verify
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="catalog.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-pills"></i> Catalog
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="dashboard.html" class="nav-link active">
+                        <i class="fas fa-chart-line"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="manufacturer.html" class="nav-link dropdown-toggle">
+                        <i class="fas fa-industry"></i> Manufacturers
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="btn btn-outline" onclick="window.location.href='index.html#login'">Login</button>
+                <button class="btn btn-primary" onclick="window.location.href='index.html#signup'">Sign Up</button>
+            </div>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
     </header>
 
     <!-- Dashboard Container -->
@@ -950,17 +1432,26 @@
         <aside class="dashboard-sidebar">
             <div class="sidebar-header">
                 <h3>Dashboard</h3>
+<<<<<<< HEAD
                 <p>Welcome back, John!</p>
+=======
+                <p>Welcome back, User!</p>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             </div>
             
             <nav class="sidebar-nav">
                 <li>
+<<<<<<< HEAD
                     <a href="#analytics" class="active" onclick="navigateToSection('analytics', this)">
+=======
+                    <a href="#analytics" class="active">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-chart-bar"></i>
                         Analytics
                     </a>
                 </li>
                 <li>
+<<<<<<< HEAD
                     <a href="#verifications" onclick="navigateToSection('verifications', this)">
                         <i class="fas fa-qrcode"></i>
                         Verifications
@@ -968,30 +1459,55 @@
                 </li>
                 <li>
                     <a href="#reports" onclick="navigateToSection('reports', this)">
+=======
+                    <a href="#reports">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-file-alt"></i>
                         Reports
                     </a>
                 </li>
                 <li>
+<<<<<<< HEAD
                     <a href="#products" onclick="quickAction('add-product')">
+=======
+                    <a href="#verifications">
+                        <i class="fas fa-qrcode"></i>
+                        Verifications
+                    </a>
+                </li>
+                <li>
+                    <a href="#products">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-pills"></i>
                         Products
                     </a>
                 </li>
                 <li>
+<<<<<<< HEAD
                     <a href="#users" onclick="quickAction('users')">
+=======
+                    <a href="#users">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-users"></i>
                         Users
                     </a>
                 </li>
                 <li>
+<<<<<<< HEAD
                     <a href="#settings" onclick="openSettingsModal()">
+=======
+                    <a href="#settings">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-cog"></i>
                         Settings
                     </a>
                 </li>
                 <li>
+<<<<<<< HEAD
                     <a href="#help" onclick="showToast('Help documentation coming soon!', 'info')">
+=======
+                    <a href="#help">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-question-circle"></i>
                         Help
                     </a>
@@ -1001,6 +1517,7 @@
 
         <!-- Main Content -->
         <main class="dashboard-content">
+<<<<<<< HEAD
             <!-- Dashboard Header Content -->
             <div class="dashboard-header-content">
                 <div class="dashboard-title">
@@ -1011,34 +1528,80 @@
                     <button class="btn btn-success" onclick="refreshData()">
                         <i class="fas fa-sync"></i> Refresh
                     </button>
+=======
+            <!-- Dashboard Header -->
+            <div class="dashboard-header">
+                <div>
+                    <h1 class="dashboard-title">Analytics Dashboard</h1>
+                    <p>Real-time monitoring and insights</p>
+                </div>
+                <div class="dashboard-actions">
+                    <div class="date-filter">
+                        <label>From:</label>
+                        <input type="date" id="startDate" onchange="updateDateRange()">
+                        <label>To:</label>
+                        <input type="date" id="endDate" onchange="updateDateRange()">
+                    </div>
+                    <button class="export-btn" onclick="exportData()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">JD</div>
+                        <div>
+                            <div>John Doe</div>
+                            <small>Administrator</small>
+                        </div>
+                        <span class="notification-badge">3</span>
+                    </div>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                 </div>
             </div>
 
             <!-- Quick Actions -->
             <div class="quick-actions">
+<<<<<<< HEAD
                 <div class="quick-action-card" onclick="quickAction('verify')" data-aos="fade-up" data-aos-delay="100">
                     <div class="quick-action-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+=======
+                <div class="quick-action-card" onclick="quickAction('verify')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-qrcode"></i>
                     </div>
                     <h3>Quick Verify</h3>
                     <p>Verify a medicine instantly</p>
                 </div>
+<<<<<<< HEAD
                 <div class="quick-action-card" onclick="quickAction('add-product')" data-aos="fade-up" data-aos-delay="200">
                     <div class="quick-action-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+=======
+                <div class="quick-action-card" onclick="quickAction('add-product')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-plus"></i>
                     </div>
                     <h3>Add Product</h3>
                     <p>Register new medicine</p>
                 </div>
+<<<<<<< HEAD
                 <div class="quick-action-card" onclick="quickAction('report')" data-aos="fade-up" data-aos-delay="300">
                     <div class="quick-action-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+=======
+                <div class="quick-action-card" onclick="quickAction('report')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-chart-bar"></i>
                     </div>
                     <h3>Generate Report</h3>
                     <p>Create detailed analytics</p>
                 </div>
+<<<<<<< HEAD
                 <div class="quick-action-card" onclick="quickAction('users')" data-aos="fade-up" data-aos-delay="400">
                     <div class="quick-action-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+=======
+                <div class="quick-action-card" onclick="quickAction('users')">
+                    <div class="quick-action-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                         <i class="fas fa-users"></i>
                     </div>
                     <h3>Manage Users</h3>
@@ -1048,6 +1611,7 @@
 
             <!-- Analytics Section -->
             <section id="analytics">
+<<<<<<< HEAD
                 <!-- Stats Grid -->
                 <div class="stats-grid">
                     <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
@@ -1105,11 +1669,72 @@
                         <h3 class="chart-title">Verification Methods</h3>
                     </div>
                     <canvas id="methodsChart"></canvas>
+=======
+                <div class="section-header">
+                    <h2>Analytics Overview</h2>
+                    <p>Monitor your verification performance and user engagement</p>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card" data-aos="fade-up">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <div class="stat-value" data-target="15420">0</div>
+                        <div class="stat-label">Total Verifications</div>
+                    </div>
+
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value" data-target="3248">0</div>
+                        <div class="stat-label">Active Users</div>
+                    </div>
+
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-value" data-target="98.7">0</div>
+                        <div class="stat-label">Success Rate %</div>
+                    </div>
+
+                    <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7); color: white;">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="stat-value" data-target="1250">0</div>
+                        <div class="stat-label">Products Verified</div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="chart-container" data-aos="fade-up">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Verification Trends</h3>
+                        <div class="chart-controls">
+                            <button class="active" onclick="updateChart('week')">Week</button>
+                            <button onclick="updateChart('month')">Month</button>
+                            <button onclick="updateChart('year')">Year</button>
+                        </div>
+                    </div>
+                    <canvas id="verificationChart" width="400" height="100"></canvas>
+                </div>
+
+                <div class="chart-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="chart-header">
+                        <h3 class="chart-title">Verification Methods</h3>
+                    </div>
+                    <canvas id="methodsChart" width="400" height="100"></canvas>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                 </div>
             </section>
 
             <!-- Recent Verifications Table -->
             <section id="verifications">
+<<<<<<< HEAD
                 <div class="chart-header">
                     <h3 class="chart-title">Recent Verifications</h3>
                     <button class="btn btn-primary" onclick="addNewVerification()">
@@ -1118,6 +1743,14 @@
                 </div>
 
                 <div class="data-table">
+=======
+                <div class="section-header">
+                    <h2>Recent Verifications</h2>
+                    <p>Latest medicine verification records</p>
+                </div>
+
+                <div class="data-table" data-aos="fade-up">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                     <table>
                         <thead>
                             <tr>
@@ -1131,7 +1764,12 @@
                             </tr>
                         </thead>
                         <tbody id="verificationsTableBody">
+<<<<<<< HEAD
                             <!-- Data will be populated from backend API -->
+=======
+                            <tr>
+                                <td>#VER001</td>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                                 <td>Paracetamol 500mg</td>
                                 <td>MediLab</td>
                                 <td><i class="fas fa-qrcode"></i> QR Scanner</td>
@@ -1192,6 +1830,7 @@
 
             <!-- Recent Activity -->
             <section id="reports">
+<<<<<<< HEAD
                 <div class="chart-header">
                     <h3 class="chart-title">Recent Activity</h3>
                     <button class="btn btn-outline" onclick="clearActivity()">
@@ -1202,6 +1841,16 @@
                 <div class="recent-activity" id="activityFeed">
                     <div class="activity-item">
                         <div class="activity-icon" style="background: var(--success-color);">
+=======
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                    <p>Latest verification activities and system events</p>
+                </div>
+
+                <div class="recent-activity" data-aos="fade-up">
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background: #27ae60; color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                             <i class="fas fa-check"></i>
                         </div>
                         <div class="activity-content">
@@ -1211,7 +1860,11 @@
                     </div>
 
                     <div class="activity-item">
+<<<<<<< HEAD
                         <div class="activity-icon" style="background: var(--primary-color);">
+=======
+                        <div class="activity-icon" style="background: #3498db; color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                             <i class="fas fa-user-plus"></i>
                         </div>
                         <div class="activity-content">
@@ -1221,7 +1874,11 @@
                     </div>
 
                     <div class="activity-item">
+<<<<<<< HEAD
                         <div class="activity-icon" style="background: var(--warning-color);">
+=======
+                        <div class="activity-icon" style="background: #f39c12; color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                             <i class="fas fa-exclamation-triangle"></i>
                         </div>
                         <div class="activity-content">
@@ -1231,7 +1888,11 @@
                     </div>
 
                     <div class="activity-item">
+<<<<<<< HEAD
                         <div class="activity-icon" style="background: var(--secondary-color);">
+=======
+                        <div class="activity-icon" style="background: #9b59b6; color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="activity-content">
@@ -1241,7 +1902,11 @@
                     </div>
 
                     <div class="activity-item">
+<<<<<<< HEAD
                         <div class="activity-icon" style="background: var(--danger-color);">
+=======
+                        <div class="activity-icon" style="background: #e74c3c; color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                             <i class="fas fa-times"></i>
                         </div>
                         <div class="activity-content">
@@ -1254,6 +1919,7 @@
         </main>
     </div>
 
+<<<<<<< HEAD
     <!-- Modals -->
             </div>
             <div id="verificationDetails"></div>
@@ -1302,6 +1968,30 @@
             <div class="modal-header">
                 <h2>Settings</h2>
                 <button class="close-btn" onclick="closeModal('settingsModal')">&times;</button>
+=======
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 CertMed. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="settings-modal">
+            <div class="modal-header">
+                <h2>Dashboard Settings</h2>
+                <button class="close-btn" onclick="closeSettingsModal()">&times;</button>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             </div>
             
             <div class="settings-group">
@@ -1330,15 +2020,44 @@
                     <span>Share Analytics</span>
                     <div class="toggle-switch" onclick="toggleSetting(this)"></div>
                 </div>
+<<<<<<< HEAD
+=======
+                <div class="setting-item">
+                    <span>Data Retention (30 days)</span>
+                    <select class="form-control">
+                        <option>7 days</option>
+                        <option selected>30 days</option>
+                        <option>90 days</option>
+                        <option>1 year</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="settings-group">
+                <h3>Appearance</h3>
+                <div class="setting-item">
+                    <span>Dark Mode</span>
+                    <div class="toggle-switch" onclick="toggleSetting(this)"></div>
+                </div>
+                <div class="setting-item">
+                    <span>Compact View</span>
+                    <div class="toggle-switch" onclick="toggleSetting(this)"></div>
+                </div>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             </div>
             
             <div class="modal-actions">
                 <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+<<<<<<< HEAD
                 <button class="btn btn-outline" onclick="closeModal('settingsModal')">Cancel</button>
+=======
+                <button class="btn btn-outline" onclick="closeSettingsModal()">Cancel</button>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             </div>
         </div>
     </div>
 
+<<<<<<< HEAD
     <!-- Toast Container -->
     <div id="toastContainer"></div>
 
@@ -1348,11 +2067,18 @@
         let currentPeriod = 'week';
 
         // Initialize dashboard
+=======
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Dashboard-specific JavaScript
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         document.addEventListener('DOMContentLoaded', function() {
             initializeDashboard();
         });
 
         function initializeDashboard() {
+<<<<<<< HEAD
             initializeCharts();
             animateStats();
             setupEventListeners();
@@ -1508,6 +2234,212 @@
             }
         }
 
+=======
+            // Initialize charts
+            initializeCharts();
+            
+            // Animate stats
+            animateStats();
+            
+            // Setup sidebar navigation
+            setupSidebarNavigation();
+            
+            // Setup interactive features
+            setupStatInteractions();
+            
+            // Start real-time updates
+            startRealTimeUpdates();
+            
+            // Start activity feed updates
+            setInterval(addNewActivity, 8000);
+        }
+
+        function initializeCharts() {
+            // Verification Trends Chart
+            const ctx1 = document.getElementById('verificationChart').getContext('2d');
+            const verificationChart = new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                    datasets: [{
+                        label: 'Verifications',
+                        data: [120, 190, 300, 250, 220, 380, 420],
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Verification Methods Chart
+            const ctx2 = document.getElementById('methodsChart').getContext('2d');
+            const methodsChart = new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['QR Scanner', 'SMS', 'Manual Entry'],
+                    datasets: [{
+                        data: [65, 20, 15],
+                        backgroundColor: [
+                            '#667eea',
+                            '#f093fb',
+                            '#4facfe'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function animateStats() {
+            const statValues = document.querySelectorAll('.stat-value');
+            
+            statValues.forEach(stat => {
+                const target = parseFloat(stat.dataset.target);
+                const duration = 2000;
+                const start = 0;
+                const increment = target / (duration / 16);
+                let current = start;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    
+                    if (target % 1 === 0) {
+                        stat.textContent = Math.floor(current).toLocaleString();
+                    } else {
+                        stat.textContent = current.toFixed(1);
+                    }
+                }, 16);
+            });
+        }
+
+        function setupSidebarNavigation() {
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Smooth scroll to section
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        }
+
+        function updateChart(period) {
+            // Update chart based on selected period
+            const buttons = document.querySelectorAll('.chart-controls button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update chart data based on period
+            const verificationChart = Chart.getChart('verificationChart');
+            if (verificationChart) {
+                let newData, newLabels;
+                
+                switch(period) {
+                    case 'week':
+                        newLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+                        newData = [120, 190, 300, 250, 220, 380, 420];
+                        break;
+                    case 'month':
+                        newLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                        newData = [850, 1200, 950, 1400];
+                        break;
+                    case 'year':
+                        newLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        newData = [1200, 1400, 1100, 1600, 1800, 1500, 1700, 1900, 1600, 1800, 2000, 2200];
+                        break;
+                }
+                
+                verificationChart.data.labels = newLabels;
+                verificationChart.data.datasets[0].data = newData;
+                verificationChart.update();
+            }
+            
+            console.log(`Chart updated for ${period} period`);
+        }
+
+        // Add real-time data updates
+        function startRealTimeUpdates() {
+            setInterval(() => {
+                // Update random stat
+                const stats = document.querySelectorAll('.stat-value');
+                const randomStat = stats[Math.floor(Math.random() * stats.length)];
+                const currentValue = parseInt(randomStat.textContent.replace(/,/g, ''));
+                const change = Math.floor(Math.random() * 10) - 5;
+                const newValue = Math.max(0, currentValue + change);
+                randomStat.textContent = newValue.toLocaleString();
+                
+                // Add pulse animation
+                randomStat.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    randomStat.style.animation = '';
+                }, 500);
+            }, 5000);
+        }
+
+        // Add interactive hover effects for stats
+        function setupStatInteractions() {
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(-5px) scale(1)';
+                });
+                
+                card.addEventListener('click', () => {
+                    const statValue = card.querySelector('.stat-value');
+                    const statLabel = card.querySelector('.stat-label');
+                    appState.showToast(`${statLabel.textContent}: ${statValue.textContent}`, 'info');
+                });
+            });
+        }
+
+        // Enhanced Dashboard Functions
+        
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         // Quick Actions
         function quickAction(action) {
             switch(action) {
@@ -1515,17 +2447,77 @@
                     window.location.href = 'verify.html';
                     break;
                 case 'add-product':
+<<<<<<< HEAD
                     openModal('addProductModal');
+=======
+                    showAddProductModal();
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                     break;
                 case 'report':
                     generateReport();
                     break;
                 case 'users':
+<<<<<<< HEAD
                     showToast('User management coming soon!', 'info');
                     break;
             }
         }
 
+=======
+                    showUserManagement();
+                    break;
+            }
+        }
+        
+        // Date Range Filter
+        function updateDateRange() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if (startDate && endDate) {
+                appState.showToast(`Filtering data from ${startDate} to ${endDate}`, 'info');
+                // Update charts and data based on date range
+                updateChartsForDateRange(startDate, endDate);
+                updateTableForDateRange(startDate, endDate);
+            }
+        }
+        
+        // Export Data
+        function exportData() {
+            appState.showToast('Preparing data export...', 'info');
+            
+            setTimeout(() => {
+                // Create CSV data
+                const csvData = generateCSVExport();
+                downloadCSV(csvData, 'certmed-dashboard-export.csv');
+                appState.showToast('Data exported successfully!', 'success');
+            }, 1500);
+        }
+        
+        function generateCSVExport() {
+            const headers = ['ID', 'Product Name', 'Manufacturer', 'Method', 'Status', 'Date'];
+            const rows = [
+                ['VER001', 'Paracetamol 500mg', 'MediLab', 'QR Scanner', 'Authentic', '2024-01-15 14:30'],
+                ['VER002', 'Amoxicillin 250mg', 'HealthCorp', 'SMS', 'Expired', '2024-01-15 13:45'],
+                ['VER003', 'Ibuprofen 400mg', 'PharmaTech', 'Manual', 'Counterfeit', '2024-01-15 12:20']
+            ];
+            
+            return [headers, ...rows].map(row => row.join(',')).join('\n');
+        }
+        
+        function downloadCSV(csvData, filename) {
+            const blob = new Blob([csvData], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.setAttribute('hidden', '');
+            a.setAttribute('href', url);
+            a.setAttribute('download', filename);
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+        
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         // View Verification Details
         function viewVerification(id) {
             const verificationData = {
@@ -1546,6 +2538,7 @@
                     date: '2024-01-15 13:45',
                     user: 'Jane Smith',
                     location: 'Los Angeles, USA'
+<<<<<<< HEAD
                 },
                 'VER003': {
                     product: 'Ibuprofen 400mg',
@@ -1573,11 +2566,14 @@
                     date: '2024-01-15 10:30',
                     user: 'Charlie Wilson',
                     location: 'Phoenix, USA'
+=======
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                 }
             };
             
             const data = verificationData[id];
             if (data) {
+<<<<<<< HEAD
                 const detailsHtml = `
                     <div class="verification-details">
                         <div class="detail-row">
@@ -1666,6 +2662,129 @@
             showToast('Generating report...', 'info');
             
             setTimeout(() => {
+=======
+                showVerificationModal(data);
+            }
+        }
+        
+        function showVerificationModal(data) {
+            const modalHtml = `
+                <div class="modal active" id="verificationModal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal('verificationModal')">&times;</span>
+                        <h2>Verification Details</h2>
+                        <div class="verification-details">
+                            <div class="detail-row">
+                                <strong>Product:</strong> ${data.product}
+                            </div>
+                            <div class="detail-row">
+                                <strong>Manufacturer:</strong> ${data.manufacturer}
+                            </div>
+                            <div class="detail-row">
+                                <strong>Verification Method:</strong> ${data.method}
+                            </div>
+                            <div class="detail-row">
+                                <strong>Status:</strong> <span class="status-badge status-${data.status.toLowerCase() === 'authentic' ? 'success' : data.status.toLowerCase() === 'expired' ? 'warning' : 'danger'}">${data.status}</span>
+                            </div>
+                            <div class="detail-row">
+                                <strong>Date:</strong> ${data.date}
+                            </div>
+                            <div class="detail-row">
+                                <strong>Verified by:</strong> ${data.user}
+                            </div>
+                            <div class="detail-row">
+                                <strong>Location:</strong> ${data.location}
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn btn-primary" onclick="downloadCertificate('${data.product}')">Download Certificate</button>
+                            <button class="btn btn-outline" onclick="closeModal('verificationModal')">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const modalContainer = document.createElement('div');
+            modalContainer.innerHTML = modalHtml;
+            document.body.appendChild(modalContainer);
+        }
+        
+        // Settings Modal Functions
+        function openSettingsModal() {
+            document.getElementById('settingsModal').classList.add('active');
+        }
+        
+        function closeSettingsModal() {
+            document.getElementById('settingsModal').classList.remove('active');
+        }
+        
+        function toggleSetting(element) {
+            element.classList.toggle('active');
+        }
+        
+        function saveSettings() {
+            appState.showToast('Settings saved successfully!', 'success');
+            closeSettingsModal();
+        }
+        
+        // Add Product Modal
+        function showAddProductModal() {
+            const modalHtml = `
+                <div class="modal active" id="addProductModal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeModal('addProductModal')">&times;</span>
+                        <h2>Add New Product</h2>
+                        <form onsubmit="addNewProduct(event)">
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <input type="text" required placeholder="Enter product name">
+                            </div>
+                            <div class="form-group">
+                                <label>Manufacturer</label>
+                                <input type="text" required placeholder="Enter manufacturer name">
+                            </div>
+                            <div class="form-group">
+                                <label>Dosage</label>
+                                <input type="text" required placeholder="e.g., 500mg">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select required>
+                                    <option value="">Select category</option>
+                                    <option value="antibiotics">Antibiotics</option>
+                                    <option value="pain-relief">Pain Relief</option>
+                                    <option value="vitamins">Vitamins</option>
+                                    <option value="chronic">Chronic Conditions</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Add Product</button>
+                                <button type="button" class="btn btn-outline" onclick="closeModal('addProductModal')">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            `;
+            
+            const modalContainer = document.createElement('div');
+            modalContainer.innerHTML = modalHtml;
+            document.body.appendChild(modalContainer);
+        }
+        
+        function addNewProduct(event) {
+            event.preventDefault();
+            appState.showToast('Product added successfully!', 'success');
+            closeModal('addProductModal');
+        }
+        
+        // Report Generation
+        function generateReport() {
+            appState.showToast('Generating report...', 'info');
+            
+            setTimeout(() => {
+                appState.showToast('Report generated successfully! Downloading...', 'success');
+                // Simulate report download
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                 const reportData = {
                     title: 'CertMed Analytics Report',
                     date: new Date().toLocaleDateString(),
@@ -1676,10 +2795,16 @@
                 };
                 
                 downloadJSON(reportData, 'certmed-report.json');
+<<<<<<< HEAD
                 showToast('Report generated successfully!', 'success');
             }, 2000);
         }
 
+=======
+            }, 2000);
+        }
+        
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
         function downloadJSON(data, filename) {
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
             const url = window.URL.createObjectURL(blob);
@@ -1691,6 +2816,7 @@
             a.click();
             document.body.removeChild(a);
         }
+<<<<<<< HEAD
 
         // Download Certificate
         function downloadCertificate(product) {
@@ -1972,12 +3098,102 @@
             
             const randomActivity = activities[Math.floor(Math.random() * activities.length)];
             const activityFeed = document.getElementById('activityFeed');
+=======
+        
+        // User Management
+        function showUserManagement() {
+            appState.showToast('User management panel coming soon!', 'info');
+        }
+        
+        // Update charts for date range
+        function updateChartsForDateRange(startDate, endDate) {
+            // Update chart data based on date range
+            const verificationChart = Chart.getChart('verificationChart');
+            if (verificationChart) {
+                // Generate new data based on date range
+                const daysDiff = Math.ceil((new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24));
+                const newData = Array.from({length: Math.min(daysDiff, 30)}, () => Math.floor(Math.random() * 500) + 100);
+                verificationChart.data.datasets[0].data = newData;
+                verificationChart.update();
+            }
+        }
+        
+        // Update table for date range
+        function updateTableForDateRange(startDate, endDate) {
+            // Filter table data based on date range
+            appState.showToast('Table data updated for selected date range', 'info');
+        }
+        
+        // Enhanced Sidebar Navigation
+        function setupSidebarNavigation() {
+            const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    sidebarLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    link.classList.add('active');
+                    
+                    // Handle navigation
+                    const target = link.getAttribute('href').substring(1);
+                    handleSidebarNavigation(target);
+                });
+            });
+        }
+        
+        function handleSidebarNavigation(section) {
+            switch(section) {
+                case 'analytics':
+                    document.getElementById('analytics').scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'reports':
+                    document.getElementById('reports').scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'verifications':
+                    document.getElementById('verifications').scrollIntoView({ behavior: 'smooth' });
+                    break;
+                case 'products':
+                    quickAction('add-product');
+                    break;
+                case 'users':
+                    showUserManagement();
+                    break;
+                case 'settings':
+                    openSettingsModal();
+                    break;
+                case 'help':
+                    appState.showToast('Help documentation coming soon!', 'info');
+                    break;
+            }
+        }
+        
+        // Add activity feed updates
+        function addNewActivity() {
+            const activities = [
+                { icon: 'fa-check', color: '#27ae60', title: 'Product Verified Successfully', time: 'Just now', method: 'QR Scanner' },
+                { icon: 'fa-user-plus', color: '#3498db', title: 'New User Registration', time: '2 minutes ago', user: 'New User' },
+                { icon: 'fa-exclamation-triangle', color: '#f39c12', title: 'Suspicious Product Detected', time: '5 minutes ago', method: 'Manual Entry' },
+                { icon: 'fa-chart-line', color: '#9b59b6', title: 'Weekly Report Generated', time: '10 minutes ago', type: 'Automated' },
+                { icon: 'fa-times', color: '#e74c3c', title: 'Verification Failed', time: '15 minutes ago', reason: 'Invalid Code' }
+            ];
+            
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            const activityContainer = document.querySelector('.recent-activity');
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             
             const newActivity = document.createElement('div');
             newActivity.className = 'activity-item';
             newActivity.style.opacity = '0';
             newActivity.innerHTML = `
+<<<<<<< HEAD
                 <div class="activity-icon" style="background: ${randomActivity.color};">
+=======
+                <div class="activity-icon" style="background: ${randomActivity.color}; color: white;">
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
                     <i class="fas ${randomActivity.icon}"></i>
                 </div>
                 <div class="activity-content">
@@ -1987,10 +3203,17 @@
             `;
             
             // Add to top of activity feed
+<<<<<<< HEAD
             if (activityFeed.firstChild) {
                 activityFeed.insertBefore(newActivity, activityFeed.firstChild);
             } else {
                 activityFeed.appendChild(newActivity);
+=======
+            if (activityContainer.firstChild) {
+                activityContainer.insertBefore(newActivity, activityContainer.firstChild);
+            } else {
+                activityContainer.appendChild(newActivity);
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             }
             
             // Fade in animation
@@ -2000,11 +3223,16 @@
             }, 100);
             
             // Remove old activities if too many
+<<<<<<< HEAD
             const allActivities = activityFeed.querySelectorAll('.activity-item');
+=======
+            const allActivities = activityContainer.querySelectorAll('.activity-item');
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
             if (allActivities.length > 5) {
                 allActivities[allActivities.length - 1].remove();
             }
         }
+<<<<<<< HEAD
 
         function updateRandomStat() {
             const statValues = document.querySelectorAll('.stat-value');
@@ -2303,5 +3531,8 @@
     <!-- Include main script -->
     <script src="script.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+=======
+    </script>
+>>>>>>> 7d3073644e04fcf195ff3316fd4176787419b135
 </body>
 </html>
